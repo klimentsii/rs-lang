@@ -1,2 +1,2 @@
 # rs-lang
-Welcome to our view of the challenge RS Lang
+Welcome to our RS Lang task review
