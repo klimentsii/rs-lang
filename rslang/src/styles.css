@@ -110,21 +110,21 @@ input[type=button] {width: auto; overflow: visible;}
 body {
   font-family: 'Shippori Antique', sans-serif;
   background-color: #6A6AB2;
-  margin: 0px;
-  display: flex;
+  width: 1550px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
+a:active, /* активная/посещенная ссылка */
+a:hover,  /* при наведении */
+a{
+  text-decoration: none;
+  color: #FFFFFF;
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-.container {
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 1400px;
-  width: 100%;
 }
 
 
