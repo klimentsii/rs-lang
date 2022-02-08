@@ -1,19 +1,20 @@
 header {
   /* width: 1550px; */
-  max-width: 100%;
-  height:80px;
   margin: 0 auto;
   background-color: #49497a86;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  font-size:21px
+  font-size:21px;
+  position: absolute;
+  width: 100%;
 }
 .header-ul{
   display: flex;
 }
 .heade-li{
-  margin-left:10px;
+  margin-left:30px;
 }
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
+}

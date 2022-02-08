@@ -110,8 +110,6 @@ input[type=button] {width: auto; overflow: visible;}
 body {
   font-family: 'Shippori Antique', sans-serif;
   background-color: #6A6AB2;
-  width: 1550px;
-  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -126,7 +124,12 @@ a{
 *::after {
   box-sizing: border-box;
 }
-
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 
 
