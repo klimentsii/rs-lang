@@ -2,12 +2,13 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
-import { MainPageComponent } from './main-page/main-page.component';
-import { BookPageComponent } from './pages/book-page/book-page.component';
-import { StatisticsPageComponent } from './pages/statistics-page/statistics-page.component';
-import { GameOasisComponent } from './pages/mini-games/game-oasis/game-oasis.component';
-import { GameSavannahComponent } from './pages/mini-games/game-savannah/game-savannah.component';
-import { GameSprintComponent } from './pages/mini-games/game-sprint/game-sprint.component';
+import { MainPageComponent } from "./pages/main-page/main-page.component";
+import { BookPageComponent } from "./pages/book-page/book-page.component";
+import { StatisticsPageComponent } from "./pages/statistics-page/statistics-page.component";
+import { GameOasisComponent } from "./pages/mini-games/game-oasis/game-oasis.component";
+import { GameSavannahComponent } from "./pages/mini-games/game-savannah/game-savannah.component";
+import { GameSprintComponent } from "./pages/mini-games/game-sprint/game-sprint.component";
+import { HeaderComponent } from "./pages/header-component/header.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { GameSprintComponent } from './pages/mini-games/game-sprint/game-sprint.
     StatisticsPageComponent,
     GameOasisComponent,
     GameSavannahComponent,
-    GameSprintComponent
+    GameSprintComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule

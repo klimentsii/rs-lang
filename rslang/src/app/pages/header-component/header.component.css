@@ -1,0 +1,44 @@
+header {
+  width: 100%;
+  background-color: #49497a86;
+  position: absolute;
+}
+.header-inner {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.header-element:nth-child(1) {
+  font-size: 30px;
+  font-weight: bold;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.header-element:nth-child(1):hover {
+  transform: scale(1.2);
+}
+.header-element:nth-child(2) {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+.header-element {
+  margin: 0;
+  padding: 0;
+  color: white;
+  text-decoration: none;
+}
+.header-burger {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  transform: scale(1);
+  transition: all 0.5s;
+}
+.header-burger:hover {
+  transform: scale(1.4);
+}
+.header-ul {
+  position: absolute;
+  top: -300px;
+}
