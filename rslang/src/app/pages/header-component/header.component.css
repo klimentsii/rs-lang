@@ -1,20 +1,29 @@
 header {
-  /* width: 1550px; */
   margin: 0 auto;
   background-color: #49497a86;
   font-size:21px;
   position: absolute;
   width: 100%;
 }
+
 .header-ul{
   display: flex;
+  align-items: center;
 }
-.heade-li{
+
+.header-li{
   margin-left:30px;
 }
+
+.header-li:nth-child(4) {
+  border: 5px solid rgb(54, 103, 50);
+  border-radius: 20px;
+  width:150px;
+  text-align: center;
+}
+
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
