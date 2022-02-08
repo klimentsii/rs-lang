@@ -7,11 +7,4 @@ import { Component } from "@angular/core";
 })
 
 export class HeaderComponent {
-  constructor() {
-    console.log(document.getElementsByClassName("header-inner")[0]);
-  }
-
-  popup() {
-    document.querySelector(".header-ul")?.classList.toggle("active");
-  }
 }
