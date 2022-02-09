@@ -13,12 +13,7 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng">A1</li>
-              <li class="level-eng">A2</li>
-              <li class="level-eng">B1</li>
-              <li class="level-eng">B2</li>
-              <li class="level-eng">C1</li>
-              <li class="level-eng">C2</li>
+              <li class="level-eng" *ngFor="let item of items" (click)="kek($event)">{{item}}</li>
             </ul>
           </div>
           <div class="right-side">
@@ -35,12 +30,7 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng">A1</li>
-              <li class="level-eng">A2</li>
-              <li class="level-eng">B1</li>
-              <li class="level-eng">B2</li>
-              <li class="level-eng">C1</li>
-              <li class="level-eng">C2</li>
+              <li class="level-eng" *ngFor="let item of items">{{item}}</li>
             </ul>
           </div>
           <div class="right-side">

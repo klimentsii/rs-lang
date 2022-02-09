@@ -85,6 +85,12 @@
   border-color:#2e7546;
   transition: .3s;
 }
+
+.level-active{
+  color:rgba(101, 181, 214, 0.600);
+  border-color:rgba(101, 181, 214, 0.600);
+}
+
 .title-select-lvl{
   font-size:14px;
   margin: 30px 0;
