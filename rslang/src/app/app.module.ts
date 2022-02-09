@@ -29,7 +29,8 @@ const appRoutes: Routes = [
     GameOasisComponent,
     GameSavannahComponent,
     GameSprintComponent,
-    HeaderComponent
+    HeaderComponent,
+    PageGamesComponent
   ],
   imports: [
     BrowserModule,
