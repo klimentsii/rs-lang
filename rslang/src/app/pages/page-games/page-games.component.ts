@@ -8,10 +8,4 @@ import { Component } from "@angular/core";
 export class PageGamesComponent {
   items: string[] = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
-  kek(e: Event): void {
-    (e.target as HTMLElement).classList.contains("level-active")
-      ? (e.target as HTMLElement).classList.remove("level-active")
-      : (e.target as HTMLElement).classList.add("level-active");
-
-  }
 }

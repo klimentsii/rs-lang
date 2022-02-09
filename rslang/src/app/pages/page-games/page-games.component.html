@@ -13,11 +13,12 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng" *ngFor="let item of items" (click)="kek($event)">{{item}}</li>
+              <li class="level-eng" *ngFor="let item of items">{{item}}</li>
             </ul>
           </div>
           <div class="right-side">
-            <img class="image-of-game" src="../../../assets/svg/time.png" alt="game-info">
+            <a routerLink="/games/sprint"><button class="btn-start">начать</button></a>
+            <img class="image-of-game" src="../../../assets/svg/time.png" alt="hourglass">
           </div>
         </div>
         <div class="game">
@@ -34,7 +35,8 @@
             </ul>
           </div>
           <div class="right-side">
-            <img class="image-of-game" src="../../../assets/svg/hear.png" alt="game-info">
+            <a routerLink="/games/audio-call"><button class="btn-start">начать</button></a>
+            <img class="image-of-game" src="../../../assets/svg/hear.png" alt="headphones">
           </div>
         </div>
       </div>

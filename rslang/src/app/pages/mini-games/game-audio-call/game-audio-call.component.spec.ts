@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameSavannahComponent } from './game-savannah.component';
+import { GameAudioCallComponent } from './game-audio-call.component';
 
-describe('GameSavannahComponent', () => {
-  let component: GameSavannahComponent;
-  let fixture: ComponentFixture<GameSavannahComponent>;
+describe('GameAudioCallComponent', () => {
+  let component: GameAudioCallComponent;
+  let fixture: ComponentFixture<GameAudioCallComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GameSavannahComponent ]
+      declarations: [ GameAudioCallComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameSavannahComponent);
+    fixture = TestBed.createComponent(GameAudioCallComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
