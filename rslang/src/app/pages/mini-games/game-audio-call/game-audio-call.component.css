@@ -1,0 +1,83 @@
+.audio-call-page {
+  width: 100%;
+  height: 100vh;
+  background: url('/assets/bg/audio-call-bg.jpg') center no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
+.audio-call-inner img{
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.audio-call-inner img:hover{
+  transform: scale(1.05);
+  transition: .3s;
+}
+
+.audio-call-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #FFFFFF;
+}
+
+.list-of-words{
+  margin-top: 50px;
+  display: flex;
+}
+
+.word-answers{
+  margin-left:40px;
+  width: max-content;
+  padding: 4px 30px;
+  height: 40px;
+  font-size:22px;
+  border-radius: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.100);
+  color:rgba(255, 255, 255, 0.700);
+  transition:.3s;
+  cursor: pointer;
+}
+
+.word-answers:hover {
+  border: 3px solid rgba(255, 255, 255, 0.500);
+  color:rgb(255, 255, 255);
+  transition:.3s;
+}
+
+.word-answers:nth-child(1) {
+  margin-left:0;
+}
+
+.audio-call-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit{
+  margin-top:50px;
+  width:150px;
+  height:50px;
+  border-radius: 50px;
+  background:rgba(169, 163, 163, 0.200);
+  font-size:24px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.btn-submit:hover {
+  transition:.3s;
+  background:rgba(169, 163, 163, 0.400);
+}
+
