@@ -49,16 +49,20 @@ export class GameAudioCallComponent {
   rand!: number;
 
   constructor(private _location: Location) {
-    this.getDb();
-    this.randomWord();
-    this.audioPlay();
-    this.randomize();
+    try {
+      this.getDb();
+      this.randomWord();
+      this.audioPlay();
+      this.randomize();
+    }
+
+    catch (err) {
+      if (this.db === null || undefined) this._location.back();
+    }
   }
 
-  getDb(): void {
+  getDb() {
     this.db = JSON.parse(localStorage.getItem("db") as any);
-
-    if (this.db === null || undefined) this._location.back();
 
     localStorage.clear();
   }
@@ -87,6 +91,7 @@ export class GameAudioCallComponent {
   randomize() {
     this.rand = Math.floor(Math.random() * MAX_WORDS);
     this.arrWords = this.db.map((v: { wordTranslate: string; }) => v.wordTranslate).slice(0, MAX_WORDS);
+
     this.arrWords[this.rand] = this.wordTranslate;
     return this.arrWords;
   }
