@@ -39,10 +39,10 @@
   justify-content: space-evenly;
   color: white;
   margin-bottom: 50px;
-  background-color: #006262;
+  background-color: #529669;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 7px 7px 7px 7px #003030;
+  box-shadow: 7px 7px 7px 7px rgb(13, 65, 30);
 }
 
 .dev-img {
