@@ -21,6 +21,7 @@ const appRoutes: Routes = [
   { path: "book", component: BookPageComponent },
   { path: "games/sprint", component: GameSprintComponent },
   { path: "games/audio-call", component: GameAudioCallComponent },
+  { path: "**", component: MainPageComponent },
 ];
 
 @NgModule({

@@ -6,15 +6,43 @@
   display: flex;
 }
 
-.audio-call-inner img{
+.audio-call-inner img:nth-child(2){
   width: 200px;
   height: 200px;
   cursor: pointer;
   transition: .3s;
 }
 
-.audio-call-inner img:hover{
-  transform: scale(1.05);
+.hide{
+  opacity: 0;
+}
+
+.true-photo{
+  width:350px;
+}
+
+.show{
+  opacity: 1;
+  border-radius: 20px 40px;
+  animation: image 1s ease-in-out forwards;
+}
+
+.small-image{
+  width: 100px !important;;
+  height: 100px !important;
+}
+
+@keyframes image {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.audio-call-inner img:nth-child(2):hover{
+  transform: scale(1.02);
   transition: .3s;
 }
 

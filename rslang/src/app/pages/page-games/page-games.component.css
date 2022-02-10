@@ -86,7 +86,7 @@
   transition: .3s;
 }
 
-.level-active{
+.active{
   color:#2e7546;
   border-color:#2e7546;
 }
@@ -114,7 +114,7 @@
   width:100px;
   height:25px;
   margin-bottom: 20px;
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   text-transform: uppercase;
   /* background-color:rgba(206, 206, 206, 0.400); */
   border-radius: 5px;
