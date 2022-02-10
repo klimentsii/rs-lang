@@ -16,5 +16,7 @@ export class HeaderComponent {
 
   statisticsTitle = "Статистика";
 
-  constructor() { }
+  constructor() {
+    // empty
+  }
 }
