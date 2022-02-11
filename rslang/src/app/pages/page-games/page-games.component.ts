@@ -44,7 +44,7 @@ export class PageGamesComponent {
     return Math.round(Math.random() * MAX_PAGE);
   }
 
-  async saveDb(): Promise<void> {
+  saveDb(): void {
     localStorage.setItem("db", JSON.stringify(this.db));
   }
 

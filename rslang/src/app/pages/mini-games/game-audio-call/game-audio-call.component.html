@@ -6,10 +6,12 @@
       </div>
       <img #imageVolume src="../../../../assets/svg/volume.svg" (click)="audioPlay()" alt="volume">
       <p *ngIf="showEl">{{trueWord}}</p>
+      <p *ngIf="showEl">Правильный ответ: {{wordTranslate}}</p>
       <div class="audio-call-column">
-        <ul class="list-of-words">
-          <li class="word-answers" *ngFor="let item of writeWords()" (click)="showTrueWord($event)">{{item}}</li>
-        </ul>
+        <div class="list-of-words">
+          <button [disabled]="showEl" class="word-answers" *ngFor="let item of resultWordsOnPage; let i = index"
+            id={{i}} (click)="showTrueWord($event); nextWords(image, imageVolume)">{{item}}</button>
+        </div>
         <div (click)="nextWords(image, imageVolume)" class="btn-submit">
           <p>{{nextBtn}}</p>
         </div>

@@ -60,6 +60,14 @@
   display: flex;
 }
 
+.green-bg{
+  background-color: green !important;
+}
+
+.red-bg{
+  background-color: rgb(117, 13, 13) !important;
+}
+
 .word-answers{
   margin-left:40px;
   width: max-content;
@@ -67,6 +75,7 @@
   height: 40px;
   font-size:22px;
   border-radius: 50px;
+  background-color:transparent;
   border: 3px solid rgba(255, 255, 255, 0.100);
   color:rgba(255, 255, 255, 0.700);
   transition:.3s;
