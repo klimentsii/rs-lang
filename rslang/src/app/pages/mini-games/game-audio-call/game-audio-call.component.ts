@@ -56,11 +56,11 @@ export class GameAudioCallComponent implements OnInit {
 
   page!: number;
 
-  audioTrue?: string;
+  audioTrue!: string;
 
-  audioFalse?: string;
+  audioFalse!: string;
 
-  answer?: boolean = false;
+  answer = false;
 
   countWords = 0;
 
@@ -105,23 +105,25 @@ export class GameAudioCallComponent implements OnInit {
   }
 
   audioPlay() {
-    const voiceAudio = new Audio(`${URL}${this.audio}`);
-    voiceAudio.play();
+    if (this.countSecWords !== MAX_DATA) {
+      const voiceAudio = new Audio(`${URL}${this.audio}`);
+      voiceAudio.play();
+    }
   }
 
   randomWord(): void {
     this.r = Math.floor(Math.random() * MAX_DATA);
 
     for (let i = 0; i < this.db.length; i += 1) {
-      const data = this.db[this.r];
+      let data = this.db[this.r];
+      if (this.countWords === MAX_DATA) {
+        data = this.secDb[this.r];
+      }
       this.page = data.page;
-      this.group = data.group;
       this.trueWord = data.word;
       this.audio = data.audio;
       this.wordTranslate = data.wordTranslate;
       this.trueImage = data.image;
-      this.audioTrue = data.audioMeaning;
-      this.audioFalse = data.audioExample;
     }
 
   }
@@ -130,16 +132,22 @@ export class GameAudioCallComponent implements OnInit {
     this.rand = Math.floor(Math.random() * MAX_WORDS);
     this.arrWords = this.db.map((v: { wordTranslate: string; }) => v.wordTranslate).splice(this.countWords, MAX_WORDS);
 
-    this.arrWords[this.rand] = this.wordTranslate;
 
     if (this.countWords <= MAX_DATA - 5) {
       this.countWords += MAX_WORDS;
 
-    } else if (this.countWords >= MAX_DATA && this.countWords <= MAX_DATA * 2 - MAX_WORDS) {
-      this.arrWords = this.secDb.map((v: { wordTranslate: string; }) => { v.wordTranslate }).splice(this.countSecWords, MAX_WORDS);
+    } else if (this.countWords === MAX_DATA && this.countSecWords <= MAX_DATA - 5) {
+      this.arrWords = this.secDb.map((v: { wordTranslate: string; }) => v.wordTranslate).splice(this.countSecWords, MAX_WORDS);
       this.countSecWords += MAX_WORDS;
-      console.log(this.arrWords);
+      console.log(this.countSecWords);
+
+
+    } else if (this.countSecWords === MAX_DATA) {
+
+      this._location.back();
+      alert("well played");
     }
+    this.arrWords[this.rand] = this.wordTranslate;
 
     this.resultWordsOnPage = this.arrWords.filter((v, i, arr) => arr.indexOf(v) === i);
 
