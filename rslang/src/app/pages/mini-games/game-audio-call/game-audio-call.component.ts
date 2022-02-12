@@ -74,7 +74,17 @@ export class GameAudioCallComponent implements OnInit {
 
   countSecWords = 0;
 
-  constructor(private _location: Location, private elementRef: ElementRef) {
+  countsTrueTranslatedWords: string[] = [];
+
+  countsTrueEngWords: string[] = [];
+
+  countsOfUnansweredWords: string[] = [];
+
+  countsOfUnansweredTransWords: string[] = [];
+
+  showPopup = false;
+
+  constructor(protected _location: Location) {
 
   }
 
@@ -92,20 +102,20 @@ export class GameAudioCallComponent implements OnInit {
     }
   }
 
-  getDb() {
+  getDb(): void {
     this.db = JSON.parse(localStorage.getItem("db") as any);
 
     localStorage.clear();
   }
 
-  async getSecondDb() {
+  async getSecondDb(): Promise<void> {
     this.secDb = await fetch(`${URL}words?page=${this.page -= 1}`)
       .then(response => response.json())
       .then(data => data);
   }
 
-  audioPlay() {
-    if (this.countSecWords !== MAX_DATA) {
+  audioPlay(): void {
+    if (this.showPopup !== true) {
       const voiceAudio = new Audio(`${URL}${this.audio}`);
       voiceAudio.play();
     }
@@ -128,36 +138,36 @@ export class GameAudioCallComponent implements OnInit {
 
   }
 
-  randomize() {
+  randomize(): void {
     this.rand = Math.floor(Math.random() * MAX_WORDS);
     this.arrWords = this.db.map((v: { wordTranslate: string; }) => v.wordTranslate).splice(this.countWords, MAX_WORDS);
 
 
-    if (this.countWords <= MAX_DATA - 5) {
+    if (this.countWords <= MAX_DATA - MAX_WORDS) {
       this.countWords += MAX_WORDS;
 
-    } else if (this.countWords === MAX_DATA && this.countSecWords <= MAX_DATA - 5) {
+    } else if (this.countWords === MAX_DATA && this.countSecWords <= MAX_DATA - MAX_WORDS) {
       this.arrWords = this.secDb.map((v: { wordTranslate: string; }) => v.wordTranslate).splice(this.countSecWords, MAX_WORDS);
       this.countSecWords += MAX_WORDS;
-      console.log(this.countSecWords);
-
 
     } else if (this.countSecWords === MAX_DATA) {
+      // this._location.back();
 
-      this._location.back();
-      alert("well played");
+      this.showPopup = true;
+      // console.log(this.countsTrueWords.length);
+      // console.log(this.countsTrueWords);
+
+      // alert("well played");
     }
+
     this.arrWords[this.rand] = this.wordTranslate;
 
     this.resultWordsOnPage = this.arrWords.filter((v, i, arr) => arr.indexOf(v) === i);
 
-    if (this.resultWordsOnPage.length === MAX_WORDS - 1) {
-      this.resultWordsOnPage.unshift(this.secDb[this.r].wordTranslate);
-    }
-
+    if (this.resultWordsOnPage.length === MAX_WORDS - 1) this.resultWordsOnPage.unshift(this.secDb[this.r].wordTranslate);
   }
 
-  nextWords(img: HTMLImageElement, imgVolume: HTMLImageElement) {
+  nextWords(img: HTMLImageElement, imgVolume: HTMLImageElement): void {
     const audio = new Audio(`./assets/audio/${this.answer}-music.mp3`);
     img.src = `${URL}${this.trueImage}`;
     img.classList.remove("hide");
@@ -165,12 +175,15 @@ export class GameAudioCallComponent implements OnInit {
     imgVolume.classList.add("small-image");
 
     if (this.showEl === true) {
-      imgVolume.classList.remove("small-image");
       this.randomWord();
       this.randomize();
-      this.showEl = false;
-      img.style.display = "none";
       this.audioPlay();
+
+      this.showEl = false;
+
+      imgVolume.classList.remove("small-image");
+      img.style.display = "none";
+
       this.nextBtn = "Не знаю";
 
       if (this.btnWord.classList.contains("green-bg")) {
@@ -180,22 +193,39 @@ export class GameAudioCallComponent implements OnInit {
         this.btnWord.classList.remove("red-bg");
       }
 
+
+
     } else {
+      if (this.answer === false) {
+        this.setResultsPopup();
+      }
       audio.play();
       this.showEl = true;
       img.style.display = "block";
       this.nextBtn = "Дальше";
+      this.answer = false;
+
     }
   }
 
-  showTrueWord(e: Event) {
+  showTrueWord(e: Event): void {
     this.btnWord = e.target as HTMLElement;
+
     if (this.btnWord.textContent === this.wordTranslate) {
+      this.countsTrueTranslatedWords.push(this.btnWord.textContent);
+      this.countsTrueEngWords.push(this.trueWord);
+
       this.btnWord.classList.add("green-bg");
       this.answer = true;
     } else {
-      this.answer = false;
+
       this.btnWord.classList.add("red-bg");
+      this.answer = false;
     }
+  }
+
+  setResultsPopup(): void {
+    this.countsOfUnansweredWords.push(this.trueWord);
+    this.countsOfUnansweredTransWords.push(this.wordTranslate);
   }
 }

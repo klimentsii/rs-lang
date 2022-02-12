@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     GameSprintComponent,
     HeaderComponent,
     PageGamesComponent,
-    GameAudioCallComponent
+    GameAudioCallComponent,
   ],
   imports: [
     BrowserModule,

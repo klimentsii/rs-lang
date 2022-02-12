@@ -19,3 +19,34 @@
     </div>
   </div>
 </section>
+
+<div class="popup" *ngIf="showPopup">
+  <!-- <div class="popup" *ngIf="showPopup === false"> -->
+  <div class="box-popup">
+    <h3 class="title-popup">результаты игры</h3>
+
+    <div class="block-with-result">
+      <p>Знаю <span class="count-words green">{{countsTrueTranslatedWords.length}}</span></p>
+      <ul class="list-words">
+        <li class="word" *ngFor="let item of countsTrueTranslatedWords; let i = index">
+          {{countsTrueEngWords[i]}}
+          <span class="translate-word"> - {{item}}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="block-with-result">
+      <p>Ошибок <span class="count-words red">{{countsOfUnansweredWords.length}}</span></p>
+      <ul class="list-words">
+        <li class="word" *ngFor="let unansweredItem of countsOfUnansweredTransWords; let ind = index">
+          {{countsOfUnansweredWords[ind]}}<span class="translate-word"> - {{unansweredItem}}</span></li>
+      </ul>
+    </div>
+
+    <div class="btns">
+      <a routerLink=""><button class="btns-popup">На главную</button></a>
+      <a routerLink="/games"><button class="btns-popup" id="secBtn">Сыграть еще раз</button></a>
+    </div>
+
+  </div>
+</div>
