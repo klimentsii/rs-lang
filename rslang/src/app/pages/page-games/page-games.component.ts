@@ -1,12 +1,9 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
+
+import { URL, LAST_PAGE } from "../../constants/constants";
+import { dataBase } from "../../interfaces/interfaces";
 
 const MAX_COUNT_LEVELS = 1;
-
-const URL = "https://react-learnwords-example.herokuapp.com";
-
-const MAX_PAGE = 29;
-
-const MIN_PAGE = 0;
 @Component({
   selector: "app-page-games",
   templateUrl: "./page-games.component.html",
@@ -18,7 +15,7 @@ export class PageGamesComponent {
 
   activeLvl: HTMLElement[] = [];
 
-  db: unknown;
+  db!: dataBase;
 
   async selectLevel(el: Event, i: number, start: HTMLElement): Promise<void> {
 
@@ -35,13 +32,13 @@ export class PageGamesComponent {
 
     const page = this.getRandomPage();
 
-    this.db = await fetch(`${URL}/words?page=${page}&group=${i}`)
+    this.db = await fetch(`${URL}words?page=${page}&group=${i}`)
       .then(response => response.json())
       .then(data => data);
   }
 
   getRandomPage(): number {
-    return Math.round(Math.random() * MAX_PAGE);
+    return Math.floor(Math.random() * LAST_PAGE);
   }
 
   saveDb(): void {

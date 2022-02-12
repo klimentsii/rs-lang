@@ -1,38 +1,21 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
 
-const MAX_WORDS = 5;
+import { dataBase } from "../../../interfaces/interfaces";
+import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE } from "../../../constants/constants";
 
-const MAX_DATA = 20;
-
-const URL = "https://react-learnwords-example.herokuapp.com/";
 @Component({
   selector: "app-game-audio-call",
   templateUrl: "./game-audio-call.component.html",
   styleUrls: ["./game-audio-call.component.css"]
 })
 
-// interface IDb {
-//   id: string,
-//   group: number,
-//   page: number,
-//   word: string,
-//   image: string,
-//   audio: string,
-//   audioMeaning: string,
-//   audioExample: string,
-//   textMeaning: string,
-//   textExample: string,
-//   transcription: string,
-//   textExampleTranslate: string,
-//   textMeaningTranslate: string,
-//   wordTranslate: string
-// }
-
 export class GameAudioCallComponent implements OnInit {
   @ViewChild("image") image!: ElementRef;
 
-  db: any;
+  db!: dataBase;
+
+  secDb!: dataBase;
 
   audio!: string;
 
@@ -68,8 +51,6 @@ export class GameAudioCallComponent implements OnInit {
 
   resultWordsOnPage!: string[];
 
-  secDb: any;
-
   r!: number;
 
   countSecWords = 0;
@@ -100,16 +81,19 @@ export class GameAudioCallComponent implements OnInit {
     catch (err) {
       if (this.db === null || undefined) this._location.back();
     }
+
   }
 
   getDb(): void {
-    this.db = JSON.parse(localStorage.getItem("db") as any);
+    this.db = JSON.parse(localStorage.getItem("db") as string);
 
     localStorage.clear();
   }
 
   async getSecondDb(): Promise<void> {
-    this.secDb = await fetch(`${URL}words?page=${this.page -= 1}`)
+    this.page -= 1;
+    if (this.page < FIRST_PAGE) this.page = LAST_PAGE;
+    this.secDb = await fetch(`${URL}words?page=${this.page}`)
       .then(response => response.json())
       .then(data => data);
   }
@@ -135,13 +119,11 @@ export class GameAudioCallComponent implements OnInit {
       this.wordTranslate = data.wordTranslate;
       this.trueImage = data.image;
     }
-
   }
 
   randomize(): void {
     this.rand = Math.floor(Math.random() * MAX_WORDS);
-    this.arrWords = this.db.map((v: { wordTranslate: string; }) => v.wordTranslate).splice(this.countWords, MAX_WORDS);
-
+    this.arrWords = this.db.map((v) => v.wordTranslate).splice(this.countWords, MAX_WORDS);
 
     if (this.countWords <= MAX_DATA - MAX_WORDS) {
       this.countWords += MAX_WORDS;
@@ -151,13 +133,7 @@ export class GameAudioCallComponent implements OnInit {
       this.countSecWords += MAX_WORDS;
 
     } else if (this.countSecWords === MAX_DATA) {
-      // this._location.back();
-
       this.showPopup = true;
-      // console.log(this.countsTrueWords.length);
-      // console.log(this.countsTrueWords);
-
-      // alert("well played");
     }
 
     this.arrWords[this.rand] = this.wordTranslate;
@@ -173,39 +149,7 @@ export class GameAudioCallComponent implements OnInit {
     img.classList.remove("hide");
     img.classList.add("show");
     imgVolume.classList.add("small-image");
-
-    if (this.showEl === true) {
-      this.randomWord();
-      this.randomize();
-      this.audioPlay();
-
-      this.showEl = false;
-
-      imgVolume.classList.remove("small-image");
-      img.style.display = "none";
-
-      this.nextBtn = "Не знаю";
-
-      if (this.btnWord.classList.contains("green-bg")) {
-        this.btnWord.classList.remove("green-bg");
-      }
-      if (this.btnWord.classList.contains("red-bg")) {
-        this.btnWord.classList.remove("red-bg");
-      }
-
-
-
-    } else {
-      if (this.answer === false) {
-        this.setResultsPopup();
-      }
-      audio.play();
-      this.showEl = true;
-      img.style.display = "block";
-      this.nextBtn = "Дальше";
-      this.answer = false;
-
-    }
+    this.showOrHideEl(img, imgVolume, audio);
   }
 
   showTrueWord(e: Event): void {
@@ -218,7 +162,6 @@ export class GameAudioCallComponent implements OnInit {
       this.btnWord.classList.add("green-bg");
       this.answer = true;
     } else {
-
       this.btnWord.classList.add("red-bg");
       this.answer = false;
     }
@@ -227,5 +170,38 @@ export class GameAudioCallComponent implements OnInit {
   setResultsPopup(): void {
     this.countsOfUnansweredWords.push(this.trueWord);
     this.countsOfUnansweredTransWords.push(this.wordTranslate);
+  }
+
+  removeStyles(): void {
+    if (this.btnWord) {
+      this.btnWord.classList.remove("green-bg");
+      this.btnWord.classList.remove("red-bg");
+    }
+  }
+
+  showOrHideEl(img: HTMLImageElement, imgVolume: HTMLImageElement, aud: HTMLAudioElement): void {
+    if (this.showEl === true) {
+      this.randomWord();
+      this.randomize();
+      this.audioPlay();
+      this.removeStyles();
+
+      this.showEl = false;
+
+      imgVolume.classList.remove("small-image");
+      img.style.display = "none";
+
+      this.nextBtn = "Не знаю";
+
+    } else {
+      if (this.answer === false) {
+        this.setResultsPopup();
+      }
+      aud.play();
+      this.showEl = true;
+      img.style.display = "block";
+      this.nextBtn = "Дальше";
+      this.answer = false;
+    }
   }
 }
