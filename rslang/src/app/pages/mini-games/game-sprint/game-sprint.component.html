@@ -3,7 +3,7 @@
     <div class="sprint-inner">
       <div>
         <img src="../../../../assets/svg/timer.svg" alt="Timer">
-        <p>30 sec</p>
+        <p>{{timeOut}} sec</p>
       </div>
       <div>
         <ul class="list-rounds">
@@ -11,18 +11,18 @@
           <li class="round"></li>
           <li class="round"></li>
         </ul>
-        <p>Bonus: X3</p>
-        <p>Очки: 100</p>
+        <p>Bonus: {{bonus}}</p>
+        <p>Очки: {{points}}</p>
       </div>
       <div>
         <p>
-          <span class="words">car</span> это
-          <span class="words">машина</span> ?
+          <span class="words">{{word}}</span> это
+          <span class="words">{{wordTranslate}}</span> ?
         </p>
       </div>
       <div>
-        <button>Верно</button>
-        <button>Неверно</button>
+        <button (click)="trueAnswer()">Верно</button>
+        <button (click)="wrongAnswer()">Неверно</button>
       </div>
     </div>
   </div>
