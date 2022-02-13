@@ -65,34 +65,37 @@ export class GameAudioCallComponent implements OnInit {
 
   showPopup = false;
 
+  voiceAudio!: HTMLAudioElement;
+
   constructor(protected _location: Location) {
 
   }
 
   ngOnInit(): void {
-    try {
-      this.getDb();
-      this.randomWord();
-      this.audioPlay();
-      this.randomize();
-      this.getSecondDb();
-    }
-
-    catch (err) {
-      if (this.db === null || undefined) this._location.back();
-    }
-
+    this.getDb();
   }
 
   getDb(): void {
     this.db = JSON.parse(localStorage.getItem("db") as string);
 
+    if (this.db === null || undefined) this._location.back();
+
     localStorage.clear();
+
+
+    if (this.db) {
+      this.randomWord();
+      this.randomize();
+      this.getSecondDb();
+      this.audioPlay();
+    }
+
   }
 
   async getSecondDb(): Promise<void> {
     this.page -= 1;
     if (this.page < FIRST_PAGE) this.page = LAST_PAGE;
+
     this.secDb = await fetch(`${URL}words?page=${this.page}`)
       .then(response => response.json())
       .then(data => data);
@@ -100,8 +103,8 @@ export class GameAudioCallComponent implements OnInit {
 
   audioPlay(): void {
     if (this.showPopup !== true) {
-      const voiceAudio = new Audio(`${URL}${this.audio}`);
-      voiceAudio.play();
+      this.voiceAudio = new Audio(`${URL}${this.audio}`);
+      this.voiceAudio.play();
     }
   }
 
@@ -121,7 +124,7 @@ export class GameAudioCallComponent implements OnInit {
     }
   }
 
-  randomize(): void {
+  async randomize(): Promise<void> {
     this.rand = Math.floor(Math.random() * MAX_WORDS);
     this.arrWords = this.db.map((v) => v.wordTranslate).splice(this.countWords, MAX_WORDS);
 
@@ -140,7 +143,13 @@ export class GameAudioCallComponent implements OnInit {
 
     this.resultWordsOnPage = this.arrWords.filter((v, i, arr) => arr.indexOf(v) === i);
 
-    if (this.resultWordsOnPage.length === MAX_WORDS - 1) this.resultWordsOnPage.unshift(this.secDb[this.r].wordTranslate);
+    if (this.secDb === undefined) {
+      this.secDb = await fetch(`${URL}words?page=${this.page}`)
+        .then(response => response.json())
+        .then(data => data);
+    }
+
+    if (this.resultWordsOnPage.length < MAX_WORDS) this.resultWordsOnPage.push(this.secDb[this.r].wordTranslate);
   }
 
   nextWords(img: HTMLImageElement, imgVolume: HTMLImageElement): void {

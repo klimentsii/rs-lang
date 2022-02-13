@@ -4,9 +4,10 @@
       <div>
         <img class="true-photo hide" src="#" #image alt="answer">
       </div>
-      <img #imageVolume src="../../../../assets/svg/volume.svg" (click)="audioPlay()" alt="volume">
-      <p *ngIf="showEl">{{trueWord}}</p>
-      <p *ngIf="showEl">Правильный ответ: {{wordTranslate}}</p>
+      <div class="audio-call-show-el">
+        <p *ngIf="showEl">{{trueWord}} - <span class="true-word">{{wordTranslate}}</span></p>
+        <img #imageVolume id="imageVolume" src="../../../../assets/svg/volume.svg" (click)="audioPlay()" alt="volume">
+      </div>
       <div class="audio-call-column">
         <div class="list-of-words">
           <button [disabled]="showEl" class="word-answers" *ngFor="let item of resultWordsOnPage; let i = index"
@@ -24,22 +25,27 @@
   <div class="box-popup">
     <h3 class="title-popup">результаты игры</h3>
 
-    <div class="block-with-result">
-      <p>Знаю <span class="count-words green">{{countsTrueTranslatedWords.length}}</span></p>
-      <ul class="list-words">
-        <li class="word" *ngFor="let item of countsTrueTranslatedWords; let i = index">
-          {{countsTrueEngWords[i]}}
-          <span class="translate-word"> - {{item}}</span>
-        </li>
-      </ul>
-    </div>
+    <div class="popup-container">
+      <div class="block-with-result">
+        <p>Знаю <span class="count-words green">{{countsTrueTranslatedWords.length}}</span></p>
+        <ul class="list-words">
+          <li class="word" *ngFor="let item of countsTrueTranslatedWords; let i = index">
+            {{countsTrueEngWords[i]}}
+            <span class="translate-word"> - {{item}}</span>
+          </li>
+        </ul>
+      </div>
 
-    <div class="block-with-result">
-      <p>Ошибок <span class="count-words red">{{countsOfUnansweredWords.length}}</span></p>
-      <ul class="list-words">
-        <li class="word" *ngFor="let unansweredItem of countsOfUnansweredTransWords; let ind = index">
-          {{countsOfUnansweredWords[ind]}}<span class="translate-word"> - {{unansweredItem}}</span></li>
-      </ul>
+      <div class="block-with-result">
+        <p>Ошибок <span class="count-words red">{{countsOfUnansweredWords.length}}</span></p>
+        <ul class="list-words">
+          <li class="word" *ngFor="let item of countsOfUnansweredTransWords; let i = index">
+            {{countsOfUnansweredWords[i]}}<span class="translate-word">
+              -
+              {{item}}</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="btns">

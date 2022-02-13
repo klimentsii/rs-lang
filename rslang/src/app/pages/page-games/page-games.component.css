@@ -38,6 +38,17 @@
   flex-direction: column;
   justify-content: space-evenly;
   box-shadow: 7px 7px 7px 7px rgb(0, 41, 27);
+  animation: hoisting 1s forwards;
+}
+
+@keyframes hoisting {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .name-of-game{
