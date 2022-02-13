@@ -1,0 +1,29 @@
+.sprint-page {
+  width: 100%;
+  height: 100vh;
+  background: url('/assets/bg/sprint-bg.jpg') center no-repeat;
+  background-size: cover;
+  display: flex;
+}
+
+.sprint-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #FFFFFF;
+}
+
+.list-rounds {
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.round{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
