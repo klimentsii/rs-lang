@@ -3,6 +3,7 @@
     <div class="page-games-inner">
       <h3 class="title-games">выберите игру</h3>
       <div class="block-games">
+
         <div class="game">
           <div class="left-side-info">
             <h4 class="name-of-game">спринт</h4>
@@ -21,6 +22,7 @@
             <img class="image-of-game" src="../../../assets/svg/time.png" alt="hourglass">
           </div>
         </div>
+
         <div class="game">
           <div class="left-side-info">
             <h4 class="name-of-game">аудиовызов</h4>
@@ -31,14 +33,18 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng" *ngFor="let item of items">{{item}}</li>
+              <li class="level-eng" *ngFor="let item of items; index as i" (click)="selectLevel($event, i, start)">
+                {{item}}
+              </li>
             </ul>
           </div>
           <div class="right-side">
-            <a routerLink="/games/audio-call"><button class="btn-start">начать</button></a>
+            <a routerLink="/games/audio-call"><button #start disabled="true" (click)="saveDb()"
+                class="btn-start">начать</button></a>
             <img class="image-of-game" src="../../../assets/svg/hear.png" alt="headphones">
           </div>
         </div>
+
       </div>
     </div>
   </div>
