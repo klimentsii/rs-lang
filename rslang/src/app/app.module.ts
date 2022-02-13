@@ -15,7 +15,7 @@ import { PageGamesComponent } from "./pages/page-games/page-games.component";
 import { GameAudioCallComponent } from "./pages/mini-games/game-audio-call/game-audio-call.component";
 
 const appRoutes: Routes = [
-  { path: "", component: MainPageComponent },
+  { path: "home", component: MainPageComponent },
   { path: "statistics", component: StatisticsPageComponent },
   { path: "games", component: PageGamesComponent },
   { path: "book", component: BookPageComponent },

@@ -8,13 +8,10 @@ import { Component } from "@angular/core";
 })
 
 export class HeaderComponent {
-  gamesTitle = "Мини-игры";
 
-  logInTitle = "Вход";
+  titleLinks: string[] = ["Мини-игры", "Учебник", "Статистика", "Вход"];
 
-  bookTitle = "Учебник";
-
-  statisticsTitle = "Статистика";
+  links: string[] = ["/games", "/book", "/statistics", ""];
 
   constructor() {
     // empty
