@@ -88,6 +88,8 @@ export class GameAudioCallComponent implements OnInit {
       this.randomize();
       this.getSecondDb();
       this.audioPlay();
+
+      this.keysPress();
     }
 
   }
@@ -174,6 +176,17 @@ export class GameAudioCallComponent implements OnInit {
       this.btnWord.classList.add("red-bg");
       this.answer = false;
     }
+  }
+
+  keysPress() {
+    const imageShow = document.getElementById("image-show");
+    const imageVolume = document.getElementById("imageVolume");
+
+    document.onkeydown = (e) => {
+      if (this.showPopup === false && e.key === " ") {
+        this.nextWords(imageShow as HTMLImageElement, imageVolume as HTMLImageElement);
+      }
+    };
   }
 
   setResultsPopup(): void {
