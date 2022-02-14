@@ -99,7 +99,7 @@ export class GameAudioCallComponent implements OnInit {
     if (this.page < FIRST_PAGE) this.page = LAST_PAGE;
 
     this.secDb = await fetch(`${URL}words?page=${this.page}`)
-      .then(response => response.json())
+      .then((response: Response) => response.json())
       .then(data => data);
   }
 

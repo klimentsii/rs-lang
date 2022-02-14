@@ -15,7 +15,7 @@ const ZEROING = 0;
 
 const ONE_SEC = 1;
 
-const MAX_SEC_OF_TIMER = 3;
+const MAX_SEC_OF_TIMER = 9999;
 
 
 @Component({
@@ -58,6 +58,8 @@ export class GameSprintComponent implements OnInit {
   trueResultsWord: string[] = [];
   trueResultsWordTranslate: string[] = [];
 
+  fiftyProc?: boolean;
+
   constructor(protected _location: Location) { }
 
   ngOnInit(): void {
@@ -81,10 +83,36 @@ export class GameSprintComponent implements OnInit {
     this.r1 = randN();
     this.r2 = elseRandN();
 
+
+    this.fiftyProc = this.fiftyFifty();
+
+    // if (this.fiftyProc === true) {
+    //   this.r1 = this.r2;
+    // } else {
+    //   this.r1 = randN();
+    //   this.r2 = elseRandN();
+    // }
+
+    switch (this.fiftyFifty()) {
+      case (true):
+        this.r1 = this.r2;
+        break;
+      case (false):
+        this.r1 = randN();
+        this.r2 = elseRandN();
+        break;
+    }
+
     this.word = this.db[this.r1].word;
     this.wordTranslate = this.db[this.r2].wordTranslate;
 
     console.log(`${this.r1}  ${this.r2}`);
+
+    this.keysPress();
+  }
+
+  fiftyFifty() {
+    return Math.random() < 0.5;
   }
 
   trueAnswer(): void {
@@ -98,6 +126,7 @@ export class GameSprintComponent implements OnInit {
 
 
     if (this.r1 === this.r2) {
+      this.soundTrue();
       this.calcSumm = TEN_POINTS;
       circle[this.combo].classList.add("green-coloring");
 
@@ -112,6 +141,7 @@ export class GameSprintComponent implements OnInit {
       this.trueResultsWord.push(this.word);
       this.trueResultsWordTranslate.push(this.db[this.r1].wordTranslate);
     } else {
+      this.soundFalse();
       this.falseResultsWord.push(this.word);
       this.falseResultsWordTranslate.push(this.db[this.r1].wordTranslate);
       this.bonus = ZEROING;
@@ -143,6 +173,8 @@ export class GameSprintComponent implements OnInit {
     }
 
     if (this.r1 !== this.r2) {
+      this.soundTrue();
+
       circle[this.combo].classList.add("green-coloring");
 
 
@@ -157,6 +189,7 @@ export class GameSprintComponent implements OnInit {
       this.trueResultsWord.push(this.word);
       this.trueResultsWordTranslate.push(this.db[this.r1].wordTranslate);
     } else {
+      this.soundFalse();
       this.falseResultsWord.push(this.word);
       this.falseResultsWordTranslate.push(this.db[this.r1].wordTranslate);
       this.bonus = ZEROING;
@@ -184,5 +217,30 @@ export class GameSprintComponent implements OnInit {
         this.showPopup = true;
       }
     }, ONE_SEC * 1000);
+  }
+
+  keysPress() {
+    document.onkeyup = (e) => {
+      if (this.showPopup === false) {
+        switch (e.key) {
+          case ("ArrowLeft"):
+            this.falseAnswer();
+            break;
+          case ("ArrowRight"):
+            this.trueAnswer();
+            break;
+        }
+      }
+    };
+  }
+
+  soundTrue() {
+    const audio = new Audio(`./assets/audio/${true}-music.mp3`);
+    audio.play();
+  }
+
+  soundFalse() {
+    const audio = new Audio(`./assets/audio/${false}-music.mp3`);
+    audio.play();
   }
 }

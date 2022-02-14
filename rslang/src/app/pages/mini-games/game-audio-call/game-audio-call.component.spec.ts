@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { GameAudioCallComponent } from './game-audio-call.component';
+import { GameAudioCallComponent } from "./game-audio-call.component";
 
-describe('GameAudioCallComponent', () => {
+describe("GameAudioCallComponent", () => {
   let component: GameAudioCallComponent;
   let fixture: ComponentFixture<GameAudioCallComponent>;
 
@@ -19,7 +19,7 @@ describe('GameAudioCallComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

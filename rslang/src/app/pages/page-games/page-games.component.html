@@ -21,7 +21,7 @@
             </ul>
           </div>
           <div class="right-side">
-            <a routerLink="/games/sprint">
+            <a routerLink="/games/sprint" class="btn-start">
               <button disabled="true" #startSprint (click)="saveDb()" class="btn-start">начать</button>
             </a>
             <img class="image-of-game" src="../../../assets/svg/time.png" alt="hourglass">
@@ -45,7 +45,7 @@
             </ul>
           </div>
           <div class="right-side">
-            <a routerLink="/games/audio-call">
+            <a routerLink="/games/audio-call" class="btn-start">
               <button #startAudioCall disabled="true" (click)="saveDb()" class="btn-start">начать</button>
             </a>
             <img class="image-of-game" src="../../../assets/svg/hear.png" alt="headphones">
