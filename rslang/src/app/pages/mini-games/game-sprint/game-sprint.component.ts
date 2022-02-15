@@ -3,7 +3,7 @@ import { Location } from "@angular/common";
 
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE, randN, elseRandN } from "../../../constants/constants";
+import { URL, MAX_DATA, LAST_PAGE, randN, elseRandN } from "../../../constants/constants";
 
 const TEN_POINTS = 10;
 
@@ -14,9 +14,6 @@ const MIN_BONUS = 1;
 const ZEROING = 0;
 
 const ONE_SEC = 1;
-
-const MAX_SEC_OF_TIMER = 60;
-
 
 @Component({
   selector: "app-game-sprint",
@@ -34,15 +31,13 @@ export class GameSprintComponent implements OnInit {
 
   points = ZEROING;
   combo = ZEROING;
-  bonus = ZEROING;
 
-  timeOut = MAX_SEC_OF_TIMER;
+  timeOut = 60;
   saveCombo = MIN_BONUS;
 
   r1!: number;
   r2!: number;
   calcSumm!: number;
-
 
   showPopup?: boolean = false;
   showSum?: boolean = false;
@@ -75,7 +70,7 @@ export class GameSprintComponent implements OnInit {
     }
   }
 
-  assignDataWords() {
+  assignDataWords(): void {
     this.r1 = randN();
     this.r2 = elseRandN();
 
@@ -98,7 +93,7 @@ export class GameSprintComponent implements OnInit {
     this.keysPress();
   }
 
-  deleteDupl() {
+  deleteDupl(): void {
     if (this.arrRandNumbers.indexOf(this.r1) === -1) {
       this.arrRandNumbers.push(this.r1);
     } else if (this.arrRandNumbers.length < MAX_DATA) {
@@ -115,7 +110,7 @@ export class GameSprintComponent implements OnInit {
     }
   }
 
-  async newBd() {
+  async newBd(): Promise<void> {
     if (this.page === ZEROING) this.page = LAST_PAGE;
     this.page -= 1;
     this.db = await fetch(`${URL}words?page=${this.page}&group=${this.group}`)
@@ -123,8 +118,18 @@ export class GameSprintComponent implements OnInit {
       .then(data => data);
   }
 
-  fiftyFifty() {
+  fiftyFifty(): boolean {
     return Math.random() < 0.5;
+  }
+
+  saveTrueWords(): void {
+    this.trueResultsWord.push(this.word);
+    this.trueResultsWordTranslate.push(this.db[this.r1].wordTranslate);
+  }
+
+  saveFalseWords(): void {
+    this.falseResultsWord.push(this.word);
+    this.falseResultsWordTranslate.push(this.db[this.r1].wordTranslate);
   }
 
   trueAnswer(): void {
@@ -137,40 +142,17 @@ export class GameSprintComponent implements OnInit {
     }
 
     if (this.r1 === this.r2) {
-      this.soundTrue();
-      this.calcSumm = TEN_POINTS;
       circle[this.combo].classList.add("green-coloring");
-
-      this.calcSumm = TEN_POINTS * this.saveCombo;
-      if (circle[2].classList.contains("green-coloring")) {
-        this.saveCombo += MIN_BONUS;
-      }
-      this.points += this.calcSumm;
-      this.bonus += MIN_BONUS;
-      this.combo += MIN_BONUS;
-
-      this.trueResultsWord.push(this.word);
-      this.trueResultsWordTranslate.push(this.db[this.r1].wordTranslate);
+      this.calcPoints();
+      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      this.soundTrue();
+      this.saveTrueWords();
     } else {
       this.soundFalse();
-      this.falseResultsWord.push(this.word);
-      this.falseResultsWordTranslate.push(this.db[this.r1].wordTranslate);
-      this.bonus = ZEROING;
-      this.combo -= MIN_BONUS;
-      if (this.combo < ZEROING) this.combo = ZEROING;
+      this.saveFalseWords();
+      this.resetCombo();
       circle[this.combo].classList.remove("green-coloring");
-      if (this.combo === ZEROING) {
-        this.saveCombo -= MIN_BONUS;
-        this.calcSumm -= TEN_POINTS;
-      }
-      if (this.saveCombo === ZEROING) {
-        this.saveCombo = MIN_BONUS;
-        this.calcSumm = ZEROING;
-      }
-      this.calcSumm = ZEROING;
-
     }
-
     this.assignDataWords();
   }
 
@@ -184,53 +166,53 @@ export class GameSprintComponent implements OnInit {
     }
 
     if (this.r1 !== this.r2) {
-      this.soundTrue();
-
       circle[this.combo].classList.add("green-coloring");
-
-
-      this.calcSumm = TEN_POINTS * this.saveCombo;
-      if (circle[2].classList.contains("green-coloring")) {
-        this.saveCombo += MIN_BONUS;
-      }
-      this.points += this.calcSumm;
-
-      this.bonus += MIN_BONUS;
-      this.combo += MIN_BONUS;
-      this.trueResultsWord.push(this.word);
-      this.trueResultsWordTranslate.push(this.db[this.r1].wordTranslate);
+      this.calcPoints();
+      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      this.soundTrue();
+      this.saveTrueWords();
     } else {
       this.soundFalse();
-      this.falseResultsWord.push(this.word);
-      this.falseResultsWordTranslate.push(this.db[this.r1].wordTranslate);
-      this.bonus = ZEROING;
-      this.combo -= MIN_BONUS;
-      if (this.combo < ZEROING) this.combo = ZEROING;
+      this.saveFalseWords();
+      this.resetCombo();
       circle[this.combo].classList.remove("green-coloring");
-      if (this.combo === ZEROING) {
-        this.saveCombo -= MIN_BONUS;
-        this.calcSumm -= TEN_POINTS;
-      }
-      if (this.saveCombo === ZEROING) {
-        this.saveCombo = MIN_BONUS;
-      }
-      this.calcSumm = ZEROING;
-
     }
     this.assignDataWords();
   }
 
-  timeOfGame() {
+  calcPoints(): void {
+    this.calcSumm = TEN_POINTS;
+    this.calcSumm = TEN_POINTS * this.saveCombo;
+    this.points += this.calcSumm;
+    this.combo += MIN_BONUS;
+  }
+
+  resetCombo(): void {
+    this.combo -= MIN_BONUS;
+
+    if (this.combo < ZEROING) this.combo = ZEROING;
+
+    if (this.combo === ZEROING) {
+      this.saveCombo -= MIN_BONUS;
+      this.calcSumm -= TEN_POINTS;
+    }
+
+    if (this.saveCombo === ZEROING) this.saveCombo = MIN_BONUS;
+
+    this.calcSumm = ZEROING;
+  }
+
+  timeOfGame(): void {
     const int = setInterval(() => {
       this.timeOut -= ONE_SEC;
       if (this.timeOut === ZEROING) {
         clearInterval(int);
         this.showPopup = true;
       }
-    }, ONE_SEC * 1000);
+    }, 1000);
   }
 
-  keysPress() {
+  keysPress(): void {
     document.onkeyup = (e) => {
       if (this.showPopup === false) {
         switch (e.key) {
@@ -245,17 +227,17 @@ export class GameSprintComponent implements OnInit {
     };
   }
 
-  soundTrue() {
+  soundTrue(): void {
     const audio = new Audio(`./assets/audio/${true}-music.mp3`);
     if (localStorage.getItem("volume") !== "off") audio.play();
   }
 
-  soundFalse() {
+  soundFalse(): void {
     const audio = new Audio(`./assets/audio/${false}-music.mp3`);
     if (localStorage.getItem("volume") !== "off") audio.play();
   }
 
-  fullscreen(e: Event) {
+  fullscreen(e: Event): void {
     const img = e.target as HTMLImageElement;
     if (document.fullscreenElement) {
       img.src = "../../../../assets/svg/fullscreen.png";
@@ -266,7 +248,7 @@ export class GameSprintComponent implements OnInit {
     }
   }
 
-  muteVolume(e: Event) {
+  muteVolume(e: Event): void {
     const img = e.target as HTMLImageElement;
     if (!localStorage.getItem("volume")) {
       localStorage.setItem("volume", "on");
@@ -280,6 +262,4 @@ export class GameSprintComponent implements OnInit {
       localStorage.setItem("volume", "off");
     }
   }
-
-
 }
