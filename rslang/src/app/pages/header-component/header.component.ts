@@ -16,6 +16,8 @@ export class HeaderComponent {
 
   statisticsTitle = "Статистика";
 
+  dictionaryTitle = "Словарь";
+
   constructor() {
     // empty
   }

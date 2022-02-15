@@ -16,6 +16,9 @@
   font-size: 24px;
   max-width: 400px;
   margin: 0 auto;
+  padding: 20px;
+  border: 1px white solid;
+  border-radius: 20px;
 }
 
 .auth-input {
@@ -26,7 +29,9 @@
 }
 
 .auth-title {
-  margin-bottom: 20px;
+  padding: 20px;
+  font-size: 34px;
+  width: 100%;
 }
 
 .auth-buttons {
@@ -47,5 +52,10 @@
 }
 
 .auth-button:nth-child(2) {
-  background-color: #F3983F;
+  background-color: #E22658;
+}
+
+.auth-buttons a {
+  height: 100%;
+  width: 100%;
 }

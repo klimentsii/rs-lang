@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-auth",
-  templateUrl: "./auth.component.html",
-  styleUrls: ["./auth.component.css"]
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"]
 })
-export class AuthComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   email: string;
 
@@ -17,15 +17,15 @@ export class AuthComponent implements OnInit {
     this.email = "";
     this.password = "";
     this.reg = document.createElement("a");
-    // em
+    // empty
   }
 
   ngOnInit(): void {
-    // em
+    // empty
   }
 
-  async loginUser(user: object) {
-    const rawResponse = await fetch("https://app-name-rslang.herokuapp.com/signin", {
+  async createUser(user: object) {
+    const rawResponse = await fetch("https://app-name-rslang.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -34,9 +34,6 @@ export class AuthComponent implements OnInit {
       body: JSON.stringify(user)
     });
 
-    const content = await rawResponse.json();
-
-    return content && alert(content.message);
+    return rawResponse.ok ? rawResponse && this.reg.classList.add("active") : alert("error");
   }
-
 }
