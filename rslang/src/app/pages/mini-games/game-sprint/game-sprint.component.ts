@@ -15,7 +15,7 @@ const ZEROING = 0;
 
 const ONE_SEC = 1;
 
-const MAX_SEC_OF_TIMER = 9999;
+const MAX_SEC_OF_TIMER = 60;
 
 
 @Component({
@@ -27,29 +27,24 @@ const MAX_SEC_OF_TIMER = 9999;
 export class GameSprintComponent implements OnInit {
 
   db: dataBase = [];
-
   word!: string;
-
   wordTranslate!: string;
+  page!: number;
+  group?: number;
 
   points = ZEROING;
-
+  combo = ZEROING;
   bonus = ZEROING;
 
   timeOut = MAX_SEC_OF_TIMER;
-
-  combo = ZEROING;
-
-  r1!: number;
-
-  r2!: number;
-
   saveCombo = MIN_BONUS;
 
-  showPopup?: boolean = false;
-
+  r1!: number;
+  r2!: number;
   calcSumm!: number;
 
+
+  showPopup?: boolean = false;
   showSum?: boolean = false;
 
   falseResultsWord: string[] = [];
@@ -59,6 +54,7 @@ export class GameSprintComponent implements OnInit {
   trueResultsWordTranslate: string[] = [];
 
   fiftyProc?: boolean;
+  arrRandNumbers: number[] = [];
 
   constructor(protected _location: Location) { }
 
@@ -83,15 +79,7 @@ export class GameSprintComponent implements OnInit {
     this.r1 = randN();
     this.r2 = elseRandN();
 
-
     this.fiftyProc = this.fiftyFifty();
-
-    // if (this.fiftyProc === true) {
-    //   this.r1 = this.r2;
-    // } else {
-    //   this.r1 = randN();
-    //   this.r2 = elseRandN();
-    // }
 
     switch (this.fiftyFifty()) {
       case (true):
@@ -102,13 +90,37 @@ export class GameSprintComponent implements OnInit {
         this.r2 = elseRandN();
         break;
     }
+    this.deleteDupl();
 
     this.word = this.db[this.r1].word;
     this.wordTranslate = this.db[this.r2].wordTranslate;
 
-    console.log(`${this.r1}  ${this.r2}`);
-
     this.keysPress();
+  }
+
+  deleteDupl() {
+    if (this.arrRandNumbers.indexOf(this.r1) === -1) {
+      this.arrRandNumbers.push(this.r1);
+    } else if (this.arrRandNumbers.length < MAX_DATA) {
+      while (this.arrRandNumbers.indexOf(this.r1) !== -1) {
+        this.r1 = randN();
+      }
+      this.arrRandNumbers.push(this.r1);
+    }
+    if (this.arrRandNumbers.length === MAX_DATA) {
+      this.page = this.db[this.r1].page;
+      this.group = this.db[this.r1].group;
+      this.arrRandNumbers = [];
+      this.newBd();
+    }
+  }
+
+  async newBd() {
+    if (this.page === ZEROING) this.page = LAST_PAGE;
+    this.page -= 1;
+    this.db = await fetch(`${URL}words?page=${this.page}&group=${this.group}`)
+      .then(response => response.json())
+      .then(data => data);
   }
 
   fiftyFifty() {
@@ -123,7 +135,6 @@ export class GameSprintComponent implements OnInit {
       this.combo = ZEROING;
       circle.forEach((v => v.classList.remove("green-coloring")));
     }
-
 
     if (this.r1 === this.r2) {
       this.soundTrue();
@@ -236,11 +247,39 @@ export class GameSprintComponent implements OnInit {
 
   soundTrue() {
     const audio = new Audio(`./assets/audio/${true}-music.mp3`);
-    audio.play();
+    if (localStorage.getItem("volume") !== "off") audio.play();
   }
 
   soundFalse() {
     const audio = new Audio(`./assets/audio/${false}-music.mp3`);
-    audio.play();
+    if (localStorage.getItem("volume") !== "off") audio.play();
   }
+
+  fullscreen(e: Event) {
+    const img = e.target as HTMLImageElement;
+    if (document.fullscreenElement) {
+      img.src = "../../../../assets/svg/fullscreen.png";
+      document.exitFullscreen();
+    } else {
+      img.src = "../../../../assets/svg/exit-fullscreen.png";
+      document.documentElement.requestFullscreen();
+    }
+  }
+
+  muteVolume(e: Event) {
+    const img = e.target as HTMLImageElement;
+    if (!localStorage.getItem("volume")) {
+      localStorage.setItem("volume", "on");
+    }
+
+    if (localStorage.getItem("volume") === "off") {
+      img.src = "../../../../assets/svg/alarm.png";
+      localStorage.setItem("volume", "on");
+    } else {
+      img.src = "../../../../assets/svg/muted-alarm.png";
+      localStorage.setItem("volume", "off");
+    }
+  }
+
+
 }

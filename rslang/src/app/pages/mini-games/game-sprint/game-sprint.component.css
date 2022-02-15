@@ -68,9 +68,15 @@
 
 .timer-box{
   margin-bottom: 15px;
+  text-decoration: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.block-with-words{
+.timer-box img{
+  width: 70px;
+  height: 70px;
 }
 
 .words{
@@ -115,6 +121,21 @@
   font-size: 20px !important;
   color: #F5FFFA !important;
   opacity: 0.6;
+}
+
+.cross-full-alarm img{
+  width: 25px;
+  height: 25px;
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+
+.cross-full-alarm img:nth-child(1){
+  margin-left:0;
+}
+
+.cross-full-alarm img:hover{
+  cursor: pointer;
 }
 
 /* ------------------POPUP----------------------- */
