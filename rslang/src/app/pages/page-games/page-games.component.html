@@ -14,11 +14,16 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng" *ngFor="let item of items">{{item}}</li>
+              <li class="level-eng" *ngFor="let item of items; index as i"
+                (click)="selectLevel($event, i, startSprint)">
+                {{item}}
+              </li>
             </ul>
           </div>
           <div class="right-side">
-            <a routerLink="/games/sprint"><button class="btn-start">начать</button></a>
+            <a routerLink="/games/sprint" class="btn-start">
+              <button disabled="true" #startSprint (click)="saveDb()" class="btn-start">начать</button>
+            </a>
             <img class="image-of-game" src="../../../assets/svg/time.png" alt="hourglass">
           </div>
         </div>
@@ -33,14 +38,16 @@
             </p>
             <p class="title-select-lvl">ВЫБЕРИТЕ УРОВЕНЬ:</p>
             <ul class="list-level">
-              <li class="level-eng" *ngFor="let item of items; index as i" (click)="selectLevel($event, i, start)">
+              <li class="level-eng" *ngFor="let item of items; index as i"
+                (click)="selectLevel($event, i, startAudioCall)">
                 {{item}}
               </li>
             </ul>
           </div>
           <div class="right-side">
-            <a routerLink="/games/audio-call"><button #start disabled="true" (click)="saveDb()"
-                class="btn-start">начать</button></a>
+            <a routerLink="/games/audio-call" class="btn-start">
+              <button #startAudioCall disabled="true" (click)="saveDb()" class="btn-start">начать</button>
+            </a>
             <img class="image-of-game" src="../../../assets/svg/hear.png" alt="headphones">
           </div>
         </div>

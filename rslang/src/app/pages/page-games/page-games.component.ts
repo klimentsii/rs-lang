@@ -15,7 +15,7 @@ export class PageGamesComponent {
 
   activeLvl: HTMLElement[] = [];
 
-  db!: dataBase;
+  db: dataBase = [];
 
   async selectLevel(el: Event, i: number, start: HTMLElement): Promise<void> {
 
