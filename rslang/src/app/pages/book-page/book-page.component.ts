@@ -7,9 +7,12 @@ import { Component, OnInit } from "@angular/core";
 })
 export class BookPageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    // e
+  }
 
   ngOnInit(): void {
+    // e
   }
 
 }

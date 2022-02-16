@@ -9,9 +9,9 @@ import { Component } from "@angular/core";
 
 export class HeaderComponent {
 
-  titleLinks: string[] = ["Мини-игры", "Учебник", "Статистика", "Вход"];
+  titleLinks: string[] = ["Мини-игры", "Учебник", "Словарь", "Статистика", "Вход"];
 
-  links: string[] = ["/games", "/book", "/statistics", ""];
+  links: string[] = ["/games", "/book", "/dictionary", "/statistics", ""];
 
   constructor() {
     // empty

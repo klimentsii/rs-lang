@@ -13,6 +13,9 @@ import { GameSprintComponent } from "./pages/mini-games/game-sprint/game-sprint.
 import { HeaderComponent } from "./pages/header-component/header.component";
 import { PageGamesComponent } from "./pages/page-games/page-games.component";
 import { GameAudioCallComponent } from "./pages/mini-games/game-audio-call/game-audio-call.component";
+import { AuthComponent } from "./pages/auth/auth.component";
+import { RegisterComponent } from "./pages/register/register.component";
+import { DictionaryComponent } from "./pages/dictionary/dictionary.component";
 
 const appRoutes: Routes = [
   { path: "home", component: MainPageComponent },
@@ -21,7 +24,9 @@ const appRoutes: Routes = [
   { path: "book", component: BookPageComponent },
   { path: "games/sprint", component: GameSprintComponent },
   { path: "games/audio-call", component: GameAudioCallComponent },
-  { path: "**", component: MainPageComponent },
+  { path: "auth", component: AuthComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "dictionary", component: DictionaryComponent }
 ];
 
 @NgModule({
@@ -34,6 +39,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     PageGamesComponent,
     GameAudioCallComponent,
+    AuthComponent,
+    RegisterComponent,
+    DictionaryComponent
   ],
   imports: [
     BrowserModule,
