@@ -18,7 +18,7 @@ import { RegisterComponent } from "./pages/register/register.component";
 import { DictionaryComponent } from "./pages/dictionary/dictionary.component";
 
 const appRoutes: Routes = [
-  { path: "home", component: MainPageComponent },
+  { path: "", component: MainPageComponent },
   { path: "statistics", component: StatisticsPageComponent },
   { path: "games", component: PageGamesComponent },
   { path: "book", component: BookPageComponent },
@@ -26,7 +26,8 @@ const appRoutes: Routes = [
   { path: "games/audio-call", component: GameAudioCallComponent },
   { path: "auth", component: AuthComponent },
   { path: "register", component: RegisterComponent },
-  { path: "dictionary", component: DictionaryComponent }
+  { path: "dictionary", component: DictionaryComponent },
+  { path: "**", component: MainPageComponent },
 ];
 
 @NgModule({

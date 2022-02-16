@@ -11,7 +11,7 @@ export class HeaderComponent {
 
   titleLinks: string[] = ["Мини-игры", "Учебник", "Словарь", "Статистика", "Вход"];
 
-  links: string[] = ["/games", "/book", "/dictionary", "/statistics", ""];
+  links: string[] = ["/games", "/book", "/dictionary", "/statistics", "/auth"];
 
   constructor() {
     // empty
