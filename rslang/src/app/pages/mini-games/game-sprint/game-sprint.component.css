@@ -190,6 +190,8 @@
   font-size:30px;
   font-weight: bold;
   text-transform: uppercase;
+  color: #000000;
+
 }
 
 .block-with-result{
@@ -201,6 +203,7 @@
   font-size: 18px;
   font-weight: normal;
   letter-spacing:3px;
+  color: #000000;
 }
 
 .count-words {
@@ -256,6 +259,7 @@
   font-weight: bold;
   font-size:18px;
   letter-spacing:2px;
+  color: #000000;
 }
 
 .word::first-letter{
@@ -265,6 +269,7 @@
 .translate-word {
   font-size:18px;
   letter-spacing:2px;
+  color: #000000;
 }
 
 .points-result{
