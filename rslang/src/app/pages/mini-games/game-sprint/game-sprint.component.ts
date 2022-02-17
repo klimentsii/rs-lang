@@ -15,6 +15,17 @@ const ZEROING = 0;
 
 const ONE_SEC = 1;
 
+const obj = {
+  "countTrueWords": 0,
+  "countFalseWords": 0,
+  "procentTrueWords": 0,
+  "countAllWords": 0,
+  "maxCombo": 1,
+};
+
+localStorage.setItem("count-words-sprint", JSON.stringify(obj));
+
+
 @Component({
   selector: "app-game-sprint",
   templateUrl: "./game-sprint.component.html",
@@ -32,7 +43,7 @@ export class GameSprintComponent implements OnInit {
   points = ZEROING;
   combo = ZEROING;
 
-  timeOut = 60;
+  timeOut = 30;
   saveCombo = MIN_BONUS;
 
   r1!: number;
@@ -51,7 +62,11 @@ export class GameSprintComponent implements OnInit {
   fiftyProc?: boolean;
   arrRandNumbers: number[] = [];
 
-  constructor(protected _location: Location) { }
+  arrMaxCombo: number[] = [];
+  maxCombo = 1;
+
+  constructor(protected _location: Location) {
+  }
 
   ngOnInit(): void {
     this.getDb();
@@ -60,7 +75,8 @@ export class GameSprintComponent implements OnInit {
   getDb(): void {
     this.db = JSON.parse(localStorage.getItem("db") as string);
 
-    localStorage.clear();
+    localStorage.removeItem("db");
+    localStorage.removeItem("volume");
 
     if (this.db) {
       this.assignDataWords();
@@ -144,7 +160,10 @@ export class GameSprintComponent implements OnInit {
     if (this.r1 === this.r2) {
       circle[this.combo].classList.add("green-coloring");
       this.calcPoints();
-      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      if (circle[2].classList.contains("green-coloring")) {
+        this.saveCombo += MIN_BONUS;
+        this.arrMaxCombo.push(this.saveCombo);
+      }
       this.soundTrue();
       this.saveTrueWords();
     } else {
@@ -168,7 +187,10 @@ export class GameSprintComponent implements OnInit {
     if (this.r1 !== this.r2) {
       circle[this.combo].classList.add("green-coloring");
       this.calcPoints();
-      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      if (circle[2].classList.contains("green-coloring")) {
+        this.saveCombo += MIN_BONUS;
+        this.arrMaxCombo.push(this.saveCombo);
+      }
       this.soundTrue();
       this.saveTrueWords();
     } else {
@@ -208,8 +230,27 @@ export class GameSprintComponent implements OnInit {
       if (this.timeOut === ZEROING) {
         clearInterval(int);
         this.showPopup = true;
+        this.saveResToLocalStorage();
       }
     }, 1000);
+  }
+
+  saveResToLocalStorage(): void {
+    if (this.arrMaxCombo.length > 0)
+      this.maxCombo = Math.max(...this.arrMaxCombo);
+    if (this.showPopup === true) {
+      obj.countTrueWords += this.trueResultsWord.length;
+      obj.countFalseWords += this.falseResultsWord.length;
+      if (this.maxCombo > obj.maxCombo) {
+        obj.maxCombo = this.maxCombo;
+      }
+      console.log(this.maxCombo);
+
+      const allWords = obj.countTrueWords + obj.countFalseWords;
+
+      obj.procentTrueWords = Math.round(obj.countTrueWords / allWords * 100);
+      localStorage.setItem("count-words-sprint", JSON.stringify(obj));
+    }
   }
 
   keysPress(): void {

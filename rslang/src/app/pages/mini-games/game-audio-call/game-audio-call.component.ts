@@ -80,7 +80,7 @@ export class GameAudioCallComponent implements OnInit {
 
     if (this.db === null || undefined) this._location.back();
 
-    localStorage.clear();
+    localStorage.removeItem("db");
 
 
     if (this.db) {
