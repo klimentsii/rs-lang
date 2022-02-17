@@ -2,14 +2,14 @@
   <div class="container">
     <div class="page-statistics-inner">
       <h3 class="title-statistics">Статистика за сегодня</h3>
-      <div class="main-results" *ngFor="let item of resInfo">
-        <div class="box-res">
+      <div class="main-results">
+        <div class="box-res" *ngFor="let item of resInfo">
           <p class="res">42</p>
-          <p class="res">{{item}}</p>
+          <p class="res-info">{{item}}</p>
         </div>
       </div>
-      <div class="games-results" *ngFor="let item of titleGames">
-        <div class="block-game">
+      <div class="games-results">
+        <div class="block-game" *ngFor="let item of titleGames">
           <h4 class="title-game">{{item}}</h4>
           <ul class="list">
             <li class="list-content">
@@ -25,6 +25,7 @@
               <span class="li-content-info">Самая длинная серия: x10</span>
             </li>
           </ul>
+          <!-- <img class="lightbulb" src="../../../assets/images/light-bulb-g7823748e5_640.jpg" alt="Lightbulb"> -->
         </div>
       </div>
     </div>
