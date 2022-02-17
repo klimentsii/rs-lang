@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE } from "../../../constants/constants";
+import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE, obj } from "../../../constants/constants";
 
 @Component({
   selector: "app-game-audio-call",
@@ -67,6 +67,12 @@ export class GameAudioCallComponent implements OnInit {
 
   voiceAudio!: HTMLAudioElement;
 
+  arrMaxCombo: number[] = [];
+
+  maxCombo = 1;
+
+  saveCombo = 0;
+
   constructor(protected _location: Location) {
 
   }
@@ -91,7 +97,23 @@ export class GameAudioCallComponent implements OnInit {
 
       this.keysPress();
     }
+  }
 
+  saveResToLocalStorage(): void {
+    if (this.arrMaxCombo.length > 0)
+      this.maxCombo = Math.max(...this.arrMaxCombo);
+    if (this.showPopup === true) {
+      obj.audiocall.countTrueWords += this.countsTrueTranslatedWords.length;
+      obj.audiocall.countFalseWords += this.countsOfUnansweredWords.length;
+
+      if (this.maxCombo > obj.audiocall.maxCombo) obj.audiocall.maxCombo = this.maxCombo;
+
+      const allWords = obj.audiocall.countTrueWords + obj.audiocall.countFalseWords;
+
+      if (obj.audiocall.countTrueWords !== 0 && allWords !== 0)
+        obj.audiocall.procentTrueWords = Math.round(obj.audiocall.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(obj));
+    }
   }
 
   async getSecondDb(): Promise<void> {
@@ -139,6 +161,7 @@ export class GameAudioCallComponent implements OnInit {
 
     } else if (this.countSecWords === MAX_DATA) {
       this.showPopup = true;
+      this.saveResToLocalStorage();
     }
 
     this.arrWords[this.rand] = this.wordTranslate;
@@ -172,10 +195,13 @@ export class GameAudioCallComponent implements OnInit {
 
       this.btnWord.classList.add("green-bg");
       this.answer = true;
+      this.saveCombo += 1;
     } else {
       this.btnWord.classList.add("red-bg");
       this.answer = false;
+      this.saveCombo = 0;
     }
+    this.arrMaxCombo.push(this.saveCombo);
   }
 
   keysPress() {

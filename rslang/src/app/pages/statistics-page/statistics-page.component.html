@@ -3,8 +3,8 @@
     <div class="page-statistics-inner">
       <h3 class="title-statistics">Статистика за сегодня</h3>
       <div class="main-results">
-        <div class="box-res" *ngFor="let item of resInfo">
-          <p class="res">42</p>
+        <div class="box-res" *ngFor="let item of resInfo; let i = index">
+          <p class="res">{{overallResults[i]}}</p>
           <p class="res-info">{{item}}</p>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Location } from "@angular/common";
 
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_DATA, LAST_PAGE, randN, elseRandN } from "../../../constants/constants";
+import { URL, MAX_DATA, LAST_PAGE, randN, elseRandN, obj } from "../../../constants/constants";
 
 const TEN_POINTS = 10;
 
@@ -14,17 +14,6 @@ const MIN_BONUS = 1;
 const ZEROING = 0;
 
 const ONE_SEC = 1;
-
-const obj = {
-  "countTrueWords": 0,
-  "countFalseWords": 0,
-  "procentTrueWords": 0,
-  "countAllWords": 0,
-  "maxCombo": 1,
-};
-
-localStorage.setItem("count-words-sprint", JSON.stringify(obj));
-
 
 @Component({
   selector: "app-game-sprint",
@@ -43,7 +32,7 @@ export class GameSprintComponent implements OnInit {
   points = ZEROING;
   combo = ZEROING;
 
-  timeOut = 30;
+  timeOut = 5;
   saveCombo = MIN_BONUS;
 
   r1!: number;
@@ -236,20 +225,19 @@ export class GameSprintComponent implements OnInit {
   }
 
   saveResToLocalStorage(): void {
-    if (this.arrMaxCombo.length > 0)
+    if (this.arrMaxCombo.length > ZEROING)
       this.maxCombo = Math.max(...this.arrMaxCombo);
     if (this.showPopup === true) {
-      obj.countTrueWords += this.trueResultsWord.length;
-      obj.countFalseWords += this.falseResultsWord.length;
-      if (this.maxCombo > obj.maxCombo) {
-        obj.maxCombo = this.maxCombo;
-      }
-      console.log(this.maxCombo);
+      obj.sprint.countTrueWords += this.trueResultsWord.length;
+      obj.sprint.countFalseWords += this.falseResultsWord.length;
 
-      const allWords = obj.countTrueWords + obj.countFalseWords;
+      if (this.maxCombo > obj.sprint.maxCombo) obj.sprint.maxCombo = this.maxCombo;
 
-      obj.procentTrueWords = Math.round(obj.countTrueWords / allWords * 100);
-      localStorage.setItem("count-words-sprint", JSON.stringify(obj));
+      const allWords = obj.sprint.countTrueWords + obj.sprint.countFalseWords;
+
+      if (obj.sprint.countTrueWords !== 0 && allWords !== 0)
+        obj.sprint.procentTrueWords = Math.round(obj.sprint.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(obj));
     }
   }
 
