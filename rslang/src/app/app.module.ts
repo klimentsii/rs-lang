@@ -27,7 +27,7 @@ const appRoutes: Routes = [
   { path: "auth", component: AuthComponent },
   { path: "register", component: RegisterComponent },
   { path: "dictionary", component: DictionaryComponent },
-  { path: "**", component: MainPageComponent },
+  { path: "**", redirectTo: "/" },
 ];
 
 @NgModule({

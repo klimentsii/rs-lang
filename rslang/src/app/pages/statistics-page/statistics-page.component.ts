@@ -6,7 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./statistics-page.component.css"]
 })
 export class StatisticsPageComponent implements OnInit {
-
+  titleGames: string[] = ["Sprint", "Audio-call"];
+  resInfo: string[] = ["Слов изучено", "Правильных ответов"];
   constructor() { }
 
   ngOnInit(): void {

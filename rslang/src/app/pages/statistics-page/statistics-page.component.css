@@ -1,0 +1,36 @@
+.statistics-page {
+  background: url('/assets/bg/statistics-bg.png') center no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.page-statistics-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.title-statistics{}
+
+.main-results{}
+
+.box-res{}
+
+.res{}
+
+.games-results{}
+
+.block-game{}
+
+.title-game{}
+
+.list{}
+
+.list-content{}
+
+.icons{}
+
+.li-content-info{}
