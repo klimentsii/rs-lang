@@ -149,7 +149,9 @@ body::-webkit-scrollbar-track {
   background-color: #86868921;
 }
 
-
-
-
-
+header {
+  margin: 0 auto;
+  font-size:21px;
+  width: 100%;
+  position: absolute;
+}

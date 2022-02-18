@@ -13,6 +13,7 @@ export class StatisticsPageComponent implements OnInit {
   procentTrueWords: number[] = [0, 0];
   maxCombo: number[] = [0, 0];
   overallResults: string[] = ["0", "0"];
+  int!: number;
 
   ngOnInit(): void {
     this.getResultsSprint();
@@ -47,8 +48,17 @@ export class StatisticsPageComponent implements OnInit {
     localStorage.setItem("obj", JSON.stringify(this.obj));
   }
 
-  clearLocalStorage() {
-    const date = new Date();
-    if (date.getHours() === 0) localStorage.removeItem("obj");
+  clearLocalStorage(): void {
+    this.int = +setInterval(() => {
+      const date = new Date();
+      if (date.getHours() === 23 && date.getMinutes() === 59 && date.getSeconds() === 59) {
+        localStorage.removeItem("obj");
+        clearInterval(this.int);
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.int);
   }
 }

@@ -1,14 +1,12 @@
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <a class="header-element" routerLink="">RS Lang</a>
-      <div class="header-element">
-        <ul class="header-ul">
-          <li class="header-li" *ngFor="let item of titleLinks; let i = index">
-            <a routerLink="{{links[i]}}">{{item}}</a>
-          </li>
-        </ul>
-      </div>
+<div class="container">
+  <div class="header-inner">
+    <a class="header-element" routerLink="">RS Lang</a>
+    <div class="header-element">
+      <ul class="header-ul">
+        <li class="header-li" *ngFor="let item of titleLinks; let i = index">
+          <a routerLink="{{links[i]}}">{{item}}</a>
+        </li>
+      </ul>
     </div>
   </div>
-</header>
+</div>

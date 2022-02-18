@@ -73,9 +73,9 @@ export class GameAudioCallComponent implements OnInit {
 
   saveCombo = 0;
 
-  constructor(protected _location: Location) {
+  obj = JSON.parse(localStorage.getItem("obj") as string);
 
-  }
+  constructor(protected _location: Location) { }
 
   ngOnInit(): void {
     this.getDb();
@@ -87,7 +87,6 @@ export class GameAudioCallComponent implements OnInit {
     if (this.db === null || undefined) this._location.back();
 
     localStorage.removeItem("db");
-
 
     if (this.db) {
       this.randomWord();
@@ -103,16 +102,16 @@ export class GameAudioCallComponent implements OnInit {
     if (this.arrMaxCombo.length > 0)
       this.maxCombo = Math.max(...this.arrMaxCombo);
     if (this.showPopup === true) {
-      obj.audiocall.countTrueWords += this.countsTrueTranslatedWords.length;
-      obj.audiocall.countFalseWords += this.countsOfUnansweredWords.length;
+      this.obj.audiocall.countTrueWords += this.countsTrueTranslatedWords.length;
+      this.obj.audiocall.countFalseWords += this.countsOfUnansweredWords.length;
 
-      if (this.maxCombo > obj.audiocall.maxCombo) obj.audiocall.maxCombo = this.maxCombo;
+      if (this.maxCombo > this.obj.audiocall.maxCombo) this.obj.audiocall.maxCombo = this.maxCombo;
 
-      const allWords = obj.audiocall.countTrueWords + obj.audiocall.countFalseWords;
+      const allWords = this.obj.audiocall.countTrueWords + this.obj.audiocall.countFalseWords;
 
-      if (obj.audiocall.countTrueWords !== 0 && allWords !== 0)
-        obj.audiocall.procentTrueWords = Math.round(obj.audiocall.countTrueWords / allWords * 100);
-      localStorage.setItem("obj", JSON.stringify(obj));
+      if (this.obj.audiocall.countTrueWords !== 0 && allWords !== 0)
+        this.obj.audiocall.procentTrueWords = Math.round(this.obj.audiocall.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(this.obj));
     }
   }
 
@@ -208,7 +207,7 @@ export class GameAudioCallComponent implements OnInit {
     const imageShow = document.getElementById("image-show");
     const imageVolume = document.getElementById("imageVolume");
 
-    document.onkeydown = (e) => {
+    document.onkeyup = (e) => {
       if (this.showPopup === false && e.key === " ") {
         this.nextWords(imageShow as HTMLImageElement, imageVolume as HTMLImageElement);
       }
@@ -251,5 +250,9 @@ export class GameAudioCallComponent implements OnInit {
       this.nextBtn = "Дальше";
       this.answer = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    document.onkeyup = (e) => e.preventDefault();
   }
 }

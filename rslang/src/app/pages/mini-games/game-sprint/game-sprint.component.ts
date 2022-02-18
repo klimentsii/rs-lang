@@ -54,6 +54,8 @@ export class GameSprintComponent implements OnInit {
   arrMaxCombo: number[] = [];
   maxCombo = 1;
 
+  obj = JSON.parse(localStorage.getItem("obj") as string);
+
   constructor(protected _location: Location) {
   }
 
@@ -228,16 +230,16 @@ export class GameSprintComponent implements OnInit {
     if (this.arrMaxCombo.length > ZEROING)
       this.maxCombo = Math.max(...this.arrMaxCombo);
     if (this.showPopup === true) {
-      obj.sprint.countTrueWords += this.trueResultsWord.length;
-      obj.sprint.countFalseWords += this.falseResultsWord.length;
+      this.obj.sprint.countTrueWords += this.trueResultsWord.length;
+      this.obj.sprint.countFalseWords += this.falseResultsWord.length;
 
-      if (this.maxCombo > obj.sprint.maxCombo) obj.sprint.maxCombo = this.maxCombo;
+      if (this.maxCombo > this.obj.sprint.maxCombo) this.obj.sprint.maxCombo = this.maxCombo;
 
-      const allWords = obj.sprint.countTrueWords + obj.sprint.countFalseWords;
+      const allWords = this.obj.sprint.countTrueWords + this.obj.sprint.countFalseWords;
 
-      if (obj.sprint.countTrueWords !== 0 && allWords !== 0)
-        obj.sprint.procentTrueWords = Math.round(obj.sprint.countTrueWords / allWords * 100);
-      localStorage.setItem("obj", JSON.stringify(obj));
+      if (this.obj.sprint.countTrueWords !== 0 && allWords !== 0)
+        this.obj.sprint.procentTrueWords = Math.round(this.obj.sprint.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(this.obj));
     }
   }
 
@@ -290,5 +292,9 @@ export class GameSprintComponent implements OnInit {
       img.src = "../../../../assets/svg/muted-alarm.png";
       localStorage.setItem("volume", "off");
     }
+  }
+
+  ngOnDestroy(): void {
+    document.onkeyup = (e) => e.preventDefault();
   }
 }
