@@ -4,6 +4,12 @@
   background: url('/assets/bg/audio-call-bg.jpg') center no-repeat;
   background-size: cover;
   display: flex;
+  animation: show .5s ease-in-out forwards;
+}
+
+@keyframes show {
+  from {opacity: 0}
+  to {opacity: 1}
 }
 
 #imageVolume{

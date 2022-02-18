@@ -16,6 +16,7 @@ import { GameAudioCallComponent } from "./pages/mini-games/game-audio-call/game-
 import { AuthComponent } from "./pages/auth/auth.component";
 import { RegisterComponent } from "./pages/register/register.component";
 import { DictionaryComponent } from "./pages/dictionary/dictionary.component";
+import { MiniIconsComponent } from "./pages/mini-games/mini-icons/mini-icons.component";
 
 const appRoutes: Routes = [
   { path: "", component: MainPageComponent },
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     GameAudioCallComponent,
     AuthComponent,
     RegisterComponent,
-    DictionaryComponent
+    DictionaryComponent,
+    MiniIconsComponent
   ],
   imports: [
     BrowserModule,

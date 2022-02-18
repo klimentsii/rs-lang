@@ -6,6 +6,7 @@
   width: 100%;
   height: 100vh;
   display: flex;
+  animation: show .5s ease-in-out forwards;
 }
 
 .page-statistics-inner {
@@ -68,12 +69,18 @@
   background: url(../../../assets/bg/stat-lines.jpg) right no-repeat;
   padding: 20px 38px;
   margin-left: 200px;
+  animation: show .5s ease-in-out forwards;
   box-shadow:   1px 1px 0px #a9a9a958,
                 2px 2px 0px #a9a9a958,
                 3px 3px 0px #a9a9a958,
                 4px 4px 0px #a9a9a958,
                 5px 5px 0px #a9a9a958,
                 6px 6px 0px #a9a9a958;
+}
+
+@keyframes show {
+  from {opacity: 0}
+  to {opacity: 1}
 }
 
 .block-game:nth-child(1) {

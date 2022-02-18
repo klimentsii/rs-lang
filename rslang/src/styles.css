@@ -154,4 +154,5 @@ header {
   font-size:21px;
   width: 100%;
   position: absolute;
+  z-index: 10;
 }

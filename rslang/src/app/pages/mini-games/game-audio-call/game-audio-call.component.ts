@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE, obj } from "../../../constants/constants";
+import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE, randN } from "../../../constants/constants";
 
 @Component({
   selector: "app-game-audio-call",
@@ -132,7 +132,7 @@ export class GameAudioCallComponent implements OnInit {
   }
 
   randomWord(): void {
-    this.r = Math.floor(Math.random() * MAX_DATA);
+    this.r = randN();
 
     for (let i = 0; i < this.db.length; i += 1) {
       let data = this.db[this.r];
@@ -174,6 +174,17 @@ export class GameAudioCallComponent implements OnInit {
     }
 
     if (this.resultWordsOnPage.length < MAX_WORDS) this.resultWordsOnPage.push(this.secDb[this.r].wordTranslate);
+  }
+
+  fullscreen(e: Event): void {
+    const img = e.target as HTMLImageElement;
+    if (document.fullscreenElement) {
+      img.src = "../../../../assets/svg/fullscreen.png";
+      document.exitFullscreen();
+    } else {
+      img.src = "../../../../assets/svg/exit-fullscreen.png";
+      document.documentElement.requestFullscreen();
+    }
   }
 
   nextWords(img: HTMLImageElement, imgVolume: HTMLImageElement): void {

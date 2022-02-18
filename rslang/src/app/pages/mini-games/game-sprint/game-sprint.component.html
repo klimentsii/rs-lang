@@ -1,11 +1,7 @@
 <section class="sprint-page">
   <div class="container">
     <div class="sprint-inner">
-      <div class="cross-full-alarm">
-        <a routerLink="/games"><img src="../../../../assets/svg/cancel-cross.png" alt="Cancel"></a>
-        <img src="../../../../assets/svg/fullscreen.png" (click)="fullscreen($event)" alt="Fullscreen">
-        <img src="../../../../assets/svg/alarm.png" (click)="muteVolume($event)" alt="Alarm">
-      </div>
+      <app-mini-icons></app-mini-icons>
       <div class="timer-box">
         <img src="../../../../assets/svg/timer.svg" alt="Timer">
         <p class="sec-time">{{timeOut}} sec</p>

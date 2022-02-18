@@ -3,7 +3,7 @@ import { Location } from "@angular/common";
 
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_DATA, LAST_PAGE, randN, elseRandN, obj } from "../../../constants/constants";
+import { URL, MAX_DATA, LAST_PAGE, randN, elseRandN } from "../../../constants/constants";
 
 const TEN_POINTS = 10;
 
@@ -67,7 +67,6 @@ export class GameSprintComponent implements OnInit {
     this.db = JSON.parse(localStorage.getItem("db") as string);
 
     localStorage.removeItem("db");
-    localStorage.removeItem("volume");
 
     if (this.db) {
       this.assignDataWords();
@@ -276,21 +275,6 @@ export class GameSprintComponent implements OnInit {
     } else {
       img.src = "../../../../assets/svg/exit-fullscreen.png";
       document.documentElement.requestFullscreen();
-    }
-  }
-
-  muteVolume(e: Event): void {
-    const img = e.target as HTMLImageElement;
-    if (!localStorage.getItem("volume")) {
-      localStorage.setItem("volume", "on");
-    }
-
-    if (localStorage.getItem("volume") === "off") {
-      img.src = "../../../../assets/svg/alarm.png";
-      localStorage.setItem("volume", "on");
-    } else {
-      img.src = "../../../../assets/svg/muted-alarm.png";
-      localStorage.setItem("volume", "off");
     }
   }
 
