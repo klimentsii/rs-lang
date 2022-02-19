@@ -223,6 +223,7 @@ export class GameSprintComponent implements OnInit {
         this.saveResToLocalStorage();
       }
     }, 1000);
+
   }
 
   saveResToLocalStorage(): void {
@@ -265,17 +266,6 @@ export class GameSprintComponent implements OnInit {
   soundFalse(): void {
     const audio = new Audio(`./assets/audio/${false}-music.mp3`);
     if (localStorage.getItem("volume") !== "off") audio.play();
-  }
-
-  fullscreen(e: Event): void {
-    const img = e.target as HTMLImageElement;
-    if (document.fullscreenElement) {
-      img.src = "../../../../assets/svg/fullscreen.png";
-      document.exitFullscreen();
-    } else {
-      img.src = "../../../../assets/svg/exit-fullscreen.png";
-      document.documentElement.requestFullscreen();
-    }
   }
 
   ngOnDestroy(): void {

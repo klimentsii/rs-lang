@@ -1,5 +1,5 @@
 <div class="cross-full-alarm">
   <a routerLink="/games"><img src="../../../../assets/svg/cancel-cross.png" alt="Cancel"></a>
-  <img src="../../../../assets/svg/fullscreen.png" (click)="fullscreen($event)" alt="Fullscreen">
-  <img src="../../../../assets/svg/alarm.png" *ngIf="showAlarm" (click)="muteVolume($event)" alt="Alarm">
+  <img src="../../../../assets/svg/fullscreen.png" (click)="openFullscreen($event)" alt="Fullscreen">
+  <img src="../../../../assets/svg/alarm.png" *ngIf="visileAlarm" (click)="muteVolume($event)" alt="Alarm">
 </div>

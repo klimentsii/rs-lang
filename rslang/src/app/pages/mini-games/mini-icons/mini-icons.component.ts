@@ -12,7 +12,7 @@ const on = "on";
   styleUrls: ["./mini-icons.component.css"]
 })
 export class MiniIconsComponent implements OnInit {
-  showAlarm = false;
+  visileAlarm = false;
   sub: Subscription;
 
   constructor(private router: Router) {
@@ -20,16 +20,16 @@ export class MiniIconsComponent implements OnInit {
       if (event instanceof NavigationEnd)
         switch (event.url) {
           case ("/games/sprint"):
-            this.showAlarm = true;
+            this.visileAlarm = true;
             break;
           case ("/games/audio-call"):
-            this.showAlarm = false;
+            this.visileAlarm = false;
             break;
         }
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     localStorage.setItem("volume", on);
   }
 
@@ -38,7 +38,7 @@ export class MiniIconsComponent implements OnInit {
     localStorage.removeItem("volume");
   }
 
-  fullscreen(e: Event): void {
+  openFullscreen(e: Event): void {
     const img = e.target as HTMLImageElement;
     if (document.fullscreenElement) {
       img.src = "../../../../assets/svg/fullscreen.png";

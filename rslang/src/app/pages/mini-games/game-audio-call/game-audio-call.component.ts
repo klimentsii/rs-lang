@@ -214,7 +214,7 @@ export class GameAudioCallComponent implements OnInit {
     this.arrMaxCombo.push(this.saveCombo);
   }
 
-  keysPress() {
+  keysPress(): void {
     const imageShow = document.getElementById("image-show");
     const imageVolume = document.getElementById("imageVolume");
 
