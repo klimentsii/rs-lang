@@ -1,21 +1,45 @@
 <section class="book">
   <div class="container">
     <div class="book-inner">
-        <div class="book-title">Book</div>
-        <div class="book-suptitle">Level of difficulty</div>
+        <div class="book-title">Textbook</div>
+        <div class="book-suptitle">Levels of difficulty</div>
+        <div class="book-levels">
+            <div class="book-level" *ngFor="let item of levels; let i = index" (click)="importWord(i)">
+                <div class="book-level-symbol">{{item}}</div>
+                <div class="book-level-count">{{counts[i]}}</div>
+            </div>
+        </div>
         <div class="book-title">Words</div>
         <div class="word">
 
           <div class="word-list">
-            <div class="word-item">
-
+            <div class="word-item" *ngFor="let item of db; let i = index" (click)="activeWord(i)">
+              <div class="word-item-word">{{item.word}}</div>
+              <div class="word-item-translate">{{item.wordTranslate}}</div>
             </div>
           </div>
 
           <div class="word-info">
-
+            <img src="" alt="" class="word-info-avatar">
+            <div class="word-info-word">{{db[word].word}}</div>
+            <div class="word-info-subword">{{db[word].wordTranslate}}</div>
+            <div class="word-info-sound">{{db[word].transcription}}</div>
+            <button class="word-info-button">Into compound words</button>
+            <div class="word-info-subword">Mean</div>
+            <p class="word-info-text">{{db[word].textExample}}</p>
+            <p class="word-info-text">{{db[word].textExampleTranslate}}</p>
+            <div class="word-info-subword">Example</div>
+            <p class="word-info-text">{{db[word].textMeaning}}</p>
+            <p class="word-info-text">{{db[word].textMeaningTranslate}}</p>
           </div>
+        </div>
 
+        <div class="word-pagination">
+          <img src="assets/arrow.png" alt="" class="word-pagination-arrow" style="transform: rotate(180deg);" (click)="pagin(false)">
+          <div class="word-pagination-number">30</div>
+          <div class="word-pagination-number active">1</div>
+          <div class="word-pagination-number">2</div>
+          <img src="assets/arrow.png" alt="" class="word-pagination-arrow" (click)="pagin(true)">
         </div>
     </div>
   </div>

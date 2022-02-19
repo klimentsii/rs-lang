@@ -36,6 +36,10 @@ export class AuthComponent implements OnInit {
 
     const content = await rawResponse.json();
 
+    if (content.message === "Authorized") {
+      localStorage.setItem("token", content.token);
+    }
+
     return content && alert(content.message);
   }
 

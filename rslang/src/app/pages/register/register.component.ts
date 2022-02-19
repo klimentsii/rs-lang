@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"]
 })
+
 export class RegisterComponent implements OnInit {
 
   email: string;
