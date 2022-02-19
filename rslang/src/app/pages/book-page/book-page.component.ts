@@ -8,6 +8,12 @@ import { URL } from "src/app/constants/constants";
 //   word: object
 // }
 
+interface Word {
+  userId: string,
+  wordId: string,
+  word: object
+}
+
 @Component({
   selector: "app-book-page",
   templateUrl: "./book-page.component.html",
