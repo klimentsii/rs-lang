@@ -51,7 +51,7 @@
 }
 
 .auth-button {
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
   margin-top: 20px;
@@ -62,10 +62,15 @@
 }
 
 .auth-button:nth-child(2) {
-  background-color: #EC78A1;
+  background-color: #F19C39;
+}
+
+.auth-button:nth-child(3) {
+  background-color: #E7405E;
 }
 
 .auth-buttons a {
   height: 100%;
   width: 100%;
 }
+

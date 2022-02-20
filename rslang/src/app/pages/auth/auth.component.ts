@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit {
       return false;
     } else {
       const content = await rawResponse.json();
-      localStorage.setItem("token", content.token);
+      localStorage.setItem("auth", JSON.stringify([this.email ,this.password , content.token]));
       document.querySelector(".auth")?.append(this.createMessage("Authorized"));
       return content;
     }
@@ -64,5 +64,10 @@ export class AuthComponent implements OnInit {
       margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
     `);
     return el;
+  }
+
+  logOut() {
+    localStorage.setItem("auth", "");
+    document.querySelector(".auth")?.append(this.createMessage("Logout confirmed"));
   }
 }
