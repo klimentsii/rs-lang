@@ -32,7 +32,7 @@ export class GameSprintComponent implements OnInit {
   points = ZEROING;
   combo = ZEROING;
 
-  timeOut = 60;
+  timeOut = 5;
   saveCombo = MIN_BONUS;
 
   r1!: number;
@@ -51,7 +51,13 @@ export class GameSprintComponent implements OnInit {
   fiftyProc?: boolean;
   arrRandNumbers: number[] = [];
 
-  constructor(protected _location: Location) { }
+  arrMaxCombo: number[] = [];
+  maxCombo = 1;
+
+  obj = JSON.parse(localStorage.getItem("obj") as string);
+
+  constructor(protected _location: Location) {
+  }
 
   ngOnInit(): void {
     this.getDb();
@@ -60,7 +66,7 @@ export class GameSprintComponent implements OnInit {
   getDb(): void {
     this.db = JSON.parse(localStorage.getItem("db") as string);
 
-    localStorage.clear();
+    localStorage.removeItem("db");
 
     if (this.db) {
       this.assignDataWords();
@@ -144,7 +150,10 @@ export class GameSprintComponent implements OnInit {
     if (this.r1 === this.r2) {
       circle[this.combo].classList.add("green-coloring");
       this.calcPoints();
-      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      if (circle[2].classList.contains("green-coloring")) {
+        this.saveCombo += MIN_BONUS;
+        this.arrMaxCombo.push(this.saveCombo);
+      }
       this.soundTrue();
       this.saveTrueWords();
     } else {
@@ -168,7 +177,10 @@ export class GameSprintComponent implements OnInit {
     if (this.r1 !== this.r2) {
       circle[this.combo].classList.add("green-coloring");
       this.calcPoints();
-      if (circle[2].classList.contains("green-coloring")) this.saveCombo += MIN_BONUS;
+      if (circle[2].classList.contains("green-coloring")) {
+        this.saveCombo += MIN_BONUS;
+        this.arrMaxCombo.push(this.saveCombo);
+      }
       this.soundTrue();
       this.saveTrueWords();
     } else {
@@ -208,8 +220,27 @@ export class GameSprintComponent implements OnInit {
       if (this.timeOut === ZEROING) {
         clearInterval(int);
         this.showPopup = true;
+        this.saveResToLocalStorage();
       }
     }, 1000);
+
+  }
+
+  saveResToLocalStorage(): void {
+    if (this.arrMaxCombo.length > ZEROING)
+      this.maxCombo = Math.max(...this.arrMaxCombo);
+    if (this.showPopup === true) {
+      this.obj.sprint.countTrueWords += this.trueResultsWord.length;
+      this.obj.sprint.countFalseWords += this.falseResultsWord.length;
+
+      if (this.maxCombo > this.obj.sprint.maxCombo) this.obj.sprint.maxCombo = this.maxCombo;
+
+      const allWords = this.obj.sprint.countTrueWords + this.obj.sprint.countFalseWords;
+
+      if (this.obj.sprint.countTrueWords !== 0 && allWords !== 0)
+        this.obj.sprint.procentTrueWords = Math.round(this.obj.sprint.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(this.obj));
+    }
   }
 
   keysPress(): void {
@@ -237,29 +268,7 @@ export class GameSprintComponent implements OnInit {
     if (localStorage.getItem("volume") !== "off") audio.play();
   }
 
-  fullscreen(e: Event): void {
-    const img = e.target as HTMLImageElement;
-    if (document.fullscreenElement) {
-      img.src = "../../../../assets/svg/fullscreen.png";
-      document.exitFullscreen();
-    } else {
-      img.src = "../../../../assets/svg/exit-fullscreen.png";
-      document.documentElement.requestFullscreen();
-    }
-  }
-
-  muteVolume(e: Event): void {
-    const img = e.target as HTMLImageElement;
-    if (!localStorage.getItem("volume")) {
-      localStorage.setItem("volume", "on");
-    }
-
-    if (localStorage.getItem("volume") === "off") {
-      img.src = "../../../../assets/svg/alarm.png";
-      localStorage.setItem("volume", "on");
-    } else {
-      img.src = "../../../../assets/svg/muted-alarm.png";
-      localStorage.setItem("volume", "off");
-    }
+  ngOnDestroy(): void {
+    document.onkeyup = (e) => e.preventDefault();
   }
 }

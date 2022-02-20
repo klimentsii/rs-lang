@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { Location } from "@angular/common";
 
 import { dataBase } from "../../../interfaces/interfaces";
-import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE } from "../../../constants/constants";
+import { URL, MAX_WORDS, MAX_DATA, LAST_PAGE, FIRST_PAGE, randN } from "../../../constants/constants";
 
 @Component({
   selector: "app-game-audio-call",
@@ -67,9 +67,15 @@ export class GameAudioCallComponent implements OnInit {
 
   voiceAudio!: HTMLAudioElement;
 
-  constructor(protected _location: Location) {
+  arrMaxCombo: number[] = [];
 
-  }
+  maxCombo = 1;
+
+  saveCombo = 0;
+
+  obj = JSON.parse(localStorage.getItem("obj") as string);
+
+  constructor(protected _location: Location) { }
 
   ngOnInit(): void {
     this.getDb();
@@ -80,8 +86,7 @@ export class GameAudioCallComponent implements OnInit {
 
     if (this.db === null || undefined) this._location.back();
 
-    localStorage.clear();
-
+    localStorage.removeItem("db");
 
     if (this.db) {
       this.randomWord();
@@ -91,7 +96,23 @@ export class GameAudioCallComponent implements OnInit {
 
       this.keysPress();
     }
+  }
 
+  saveResToLocalStorage(): void {
+    if (this.arrMaxCombo.length > 0)
+      this.maxCombo = Math.max(...this.arrMaxCombo);
+    if (this.showPopup === true) {
+      this.obj.audiocall.countTrueWords += this.countsTrueTranslatedWords.length;
+      this.obj.audiocall.countFalseWords += this.countsOfUnansweredWords.length;
+
+      if (this.maxCombo > this.obj.audiocall.maxCombo) this.obj.audiocall.maxCombo = this.maxCombo;
+
+      const allWords = this.obj.audiocall.countTrueWords + this.obj.audiocall.countFalseWords;
+
+      if (this.obj.audiocall.countTrueWords !== 0 && allWords !== 0)
+        this.obj.audiocall.procentTrueWords = Math.round(this.obj.audiocall.countTrueWords / allWords * 100);
+      localStorage.setItem("obj", JSON.stringify(this.obj));
+    }
   }
 
   async getSecondDb(): Promise<void> {
@@ -111,7 +132,7 @@ export class GameAudioCallComponent implements OnInit {
   }
 
   randomWord(): void {
-    this.r = Math.floor(Math.random() * MAX_DATA);
+    this.r = randN();
 
     for (let i = 0; i < this.db.length; i += 1) {
       let data = this.db[this.r];
@@ -139,6 +160,7 @@ export class GameAudioCallComponent implements OnInit {
 
     } else if (this.countSecWords === MAX_DATA) {
       this.showPopup = true;
+      this.saveResToLocalStorage();
     }
 
     this.arrWords[this.rand] = this.wordTranslate;
@@ -152,6 +174,17 @@ export class GameAudioCallComponent implements OnInit {
     }
 
     if (this.resultWordsOnPage.length < MAX_WORDS) this.resultWordsOnPage.push(this.secDb[this.r].wordTranslate);
+  }
+
+  fullscreen(e: Event): void {
+    const img = e.target as HTMLImageElement;
+    if (document.fullscreenElement) {
+      img.src = "../../../../assets/svg/fullscreen.png";
+      document.exitFullscreen();
+    } else {
+      img.src = "../../../../assets/svg/exit-fullscreen.png";
+      document.documentElement.requestFullscreen();
+    }
   }
 
   nextWords(img: HTMLImageElement, imgVolume: HTMLImageElement): void {
@@ -172,17 +205,20 @@ export class GameAudioCallComponent implements OnInit {
 
       this.btnWord.classList.add("green-bg");
       this.answer = true;
+      this.saveCombo += 1;
     } else {
       this.btnWord.classList.add("red-bg");
       this.answer = false;
+      this.saveCombo = 0;
     }
+    this.arrMaxCombo.push(this.saveCombo);
   }
 
-  keysPress() {
+  keysPress(): void {
     const imageShow = document.getElementById("image-show");
     const imageVolume = document.getElementById("imageVolume");
 
-    document.onkeydown = (e) => {
+    document.onkeyup = (e) => {
       if (this.showPopup === false && e.key === " ") {
         this.nextWords(imageShow as HTMLImageElement, imageVolume as HTMLImageElement);
       }
@@ -225,5 +261,9 @@ export class GameAudioCallComponent implements OnInit {
       this.nextBtn = "Дальше";
       this.answer = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    document.onkeyup = (e) => e.preventDefault();
   }
 }
