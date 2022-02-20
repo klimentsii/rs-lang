@@ -5,19 +5,18 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"]
 })
+
 export class RegisterComponent implements OnInit {
 
   email: string;
 
   password: string;
-
-  reg: HTMLElement;
+  password2: string;
 
   constructor() {
     this.email = "";
     this.password = "";
-    this.reg = document.createElement("a");
-    // empty
+    this.password2 = "";
   }
 
   ngOnInit(): void {
@@ -25,15 +24,60 @@ export class RegisterComponent implements OnInit {
   }
 
   async createUser(user: object) {
-    const rawResponse = await fetch("https://app-name-rslang.herokuapp.com/users", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    });
+    const arr = document.querySelectorAll("input.auth-input");
 
-    return rawResponse.ok ? rawResponse && this.reg.classList.add("active") : alert("error");
+    if (arr[0].getAttribute("ng-reflect-model")!.length < 1) {
+      document.querySelector(".auth")?.append(this.createError("Please enter your email"));
+    } else if(String(arr[0].getAttribute("ng-reflect-model")).indexOf("@") < 0) {
+      document.querySelector(".auth")?.append(this.createError("Please add @ in your email"));
+    } else if(String(arr[0].getAttribute("ng-reflect-model")).indexOf(".") < 0) {
+      document.querySelector(".auth")?.append(this.createError("Please add . in your email"));
+    } else if (arr[1].getAttribute("ng-reflect-model")!.length < 8) {
+      document.querySelector(".auth")?.append(this.createError("Please enter your password(min 8 symbols)"));
+    }  else if (arr[1].getAttribute("ng-reflect-model") !== arr[2].getAttribute("ng-reflect-model")) {
+      document.querySelector(".auth")?.append(this.createError("Password must be the same"));
+    } else {
+      const rawResponse = await fetch("https://app-name-rslang.herokuapp.com/users", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+      });
+
+      if (rawResponse.status === 417) {
+        document.querySelector(".auth")?.append(this.createMessage("This mail alredy registered"));
+      } else if(rawResponse.status === 422) {
+        document.querySelector(".auth")?.append(this.createError("Email entered incorrectly"));
+      } else {
+        document.querySelector(".auth")?.append(this.createMessage("Registered"));
+        return rawResponse;
+      }
+    }
+
+    return false;
+  }
+
+  createError(text: string) {
+    const el = document.createElement("div");
+    el.classList.add("auth-error");
+    el.textContent = text;
+    el.setAttribute("style", `
+      border: 1px #F06171 solid; background-color: #4d010152; color: #F06171; padding: 10px 20px;
+      margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
+    `);
+    return el;
+  }
+
+  createMessage(text: string) {
+    const el = document.createElement("div");
+    el.classList.add("auth-error");
+    el.textContent = text;
+    el.setAttribute("style", `
+      border: 1px #4FEE97 solid; background-color: #4d010152; color: #4FEE97; padding: 10px 20px;
+      margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
+    `);
+    return el;
   }
 }

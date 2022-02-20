@@ -6,7 +6,15 @@
   background-size: cover;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.auth>.container{
+  position: absolute;
+  right: 0;
+  left: 0;
 }
 
 .auth-inner {
@@ -17,7 +25,7 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px white solid;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 20px;
 }
 
@@ -26,6 +34,8 @@
   height: 50px;
   border-radius: 10px;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 .auth-title {
@@ -41,21 +51,26 @@
 }
 
 .auth-button {
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
   margin-top: 20px;
 }
 
 .auth-button:nth-child(1) {
-  background-color: #FBD436;
+  background-color: #F9D292;
 }
 
 .auth-button:nth-child(2) {
-  background-color: #E22658;
+  background-color: #F19C39;
+}
+
+.auth-button:nth-child(3) {
+  background-color: #E7405E;
 }
 
 .auth-buttons a {
   height: 100%;
   width: 100%;
 }
+

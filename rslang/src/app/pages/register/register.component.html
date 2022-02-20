@@ -3,15 +3,14 @@
     <form class="auth-inner">
       <div class="auth-title">Sign up</div>
       <div class="auth-suptitle">Email:</div>
-      <input type="email" name="email" class="auth-input" value="email" [(ngModel)]="email">
+      <input type="email" name="email" class="auth-input" value="email" [(ngModel)]="email" required>
       <div class="auth-suptitle">Password:</div>
       <input type="password" name="password" class="auth-input" minlength="8" maxlength="32" value="password" [(ngModel)]="password">
+      <div class="auth-suptitle">Repeat password:</div>
+      <input type="password" name="password2" class="auth-input" minlength="8" maxlength="32" value="password2" [(ngModel)]="password2">
       <div class="auth-buttons">
         <button class="auth-button" (click)="createUser({ 'email': email, 'password': password})">Sign up</button>
       </div>
     </form>
   </div>
-
-  <div class="auth-message" [ngClass]="reg">Registered</div>
-  <div class="auth-error">Error</div>
 </section>
