@@ -9,6 +9,12 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  animation: show .5s ease-in-out forwards;
+}
+
+@keyframes show {
+  from {opacity: 0}
+  to {opacity: 1}
 }
 
 .auth>.container{

@@ -2,6 +2,12 @@
   width: 100%;
   background: url('/assets/bg/book-page.jpg') center no-repeat;
   background-size: cover;
+  animation: show 2s ease-in-out forwards;
+}
+
+@keyframes show {
+  from {opacity: 0}
+  to {opacity: 1}
 }
 
 .book-inner {
