@@ -9,7 +9,7 @@
         [(ngModel)]="password">
       <div class="auth-buttons">
         <button class="auth-button" (click)="loginUser({ 'email': email,'password': password })">Sign in</button>
-        <button class="auth-button" onclick="window.location.href='/register'">Sign up</button>
+        <a routerLink="/register"><button class="auth-button">Sign up</button></a>
         <button class="auth-button" (click)="logOut()">Log out</button>
       </div>
     </form>

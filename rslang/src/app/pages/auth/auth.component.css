@@ -57,7 +57,7 @@
 }
 
 .auth-button {
-  width: 30%;
+  width: 60%;
   height: 50px;
   border-radius: 10px;
   margin-top: 20px;
@@ -76,6 +76,9 @@
 }
 
 .auth-buttons a {
+  display:flex;
+  align-items: center;
+  justify-content:center;
   height: 100%;
   width: 100%;
 }

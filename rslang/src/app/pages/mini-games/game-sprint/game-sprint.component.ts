@@ -32,7 +32,7 @@ export class GameSprintComponent implements OnInit {
   points = ZEROING;
   combo = ZEROING;
 
-  timeOut = 5;
+  timeOut = 60;
   saveCombo = MIN_BONUS;
 
   r1!: number;
