@@ -9,10 +9,6 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  position: relative;
-
-  /* position: relative;
-  z-index: -10; */
 }
 
 .auth>.container{
@@ -72,27 +68,4 @@
 .auth-buttons a {
   height: 100%;
   width: 100%;
-}
-
-.auth-message {
-  position: absolute;
-  border: 1px rgb(0, 255, 0) solid;
-  background-color: #014d1a52;
-  color: rgb(0, 255, 0);
-  padding: 10px 20px;
-  margin: 40px;
-  bottom: 0;
-  left: 0;
-  border-radius: 10px;
-  font-size: 24px;
-  transition: all 0.5s;
-  opacity: 0;
-}
-
-.auth-message.active {
-  opacity: 1;
-}
-
-.auth-error.active {
-  opacity: 1;
 }

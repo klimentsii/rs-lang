@@ -11,13 +11,9 @@ export class AuthComponent implements OnInit {
 
   password: string;
 
-  reg: HTMLElement;
-
   constructor() {
     this.email = "";
     this.password = "";
-    this.reg = document.createElement("a");
-    // em
   }
 
   ngOnInit(): void {
@@ -34,13 +30,39 @@ export class AuthComponent implements OnInit {
       body: JSON.stringify(user)
     });
 
-    const content = await rawResponse.json();
-
-    if (content.message === "Authorized") {
+    if (rawResponse.status === 404) {
+      document.querySelector(".auth")?.append(this.createError("Not found"));
+      return false;
+    } else if(rawResponse.status === 403) {
+      document.querySelector(".auth")?.append(this.createError("Forbidden"));
+      return false;
+    } else {
+      const content = await rawResponse.json();
       localStorage.setItem("token", content.token);
+      document.querySelector(".auth")?.append(this.createMessage("Authorized"));
+      return content;
     }
-
-    return content && alert(content.message);
   }
 
+  createError(text: string) {
+    const el = document.createElement("div");
+    el.classList.add("auth-error");
+    el.textContent = text;
+    el.setAttribute("style", `
+      border: 1px #F06171 solid; background-color: #4d010152; color: #F06171; padding: 10px 20px;
+      margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
+    `);
+    return el;
+  }
+
+  createMessage(text: string) {
+    const el = document.createElement("div");
+    el.classList.add("auth-error");
+    el.textContent = text;
+    el.setAttribute("style", `
+      border: 1px #4FEE97 solid; background-color: #4d010152; color: #4FEE97; padding: 10px 20px;
+      margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
+    `);
+    return el;
+  }
 }
