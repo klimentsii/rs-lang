@@ -32,13 +32,14 @@
             <p class="word-info-text">{{db[word].textMeaning}}</p>
             <p class="word-info-text">{{db[word].textMeaningTranslate}}</p>
           </div>
+
         </div>
 
         <div class="word-pagination">
           <img src="assets/arrow.png" alt="" class="word-pagination-arrow" style="transform: rotate(180deg);" (click)="pagin(false)">
-          <div class="word-pagination-number">30</div>
-          <div class="word-pagination-number active">1</div>
-          <div class="word-pagination-number">2</div>
+          <div class="word-pagination-number">{{pages[0]}}</div>
+          <div class="word-pagination-number active">{{pages[1]}}</div>
+          <div class="word-pagination-number">{{pages[2]}}</div>
           <img src="assets/arrow.png" alt="" class="word-pagination-arrow" (click)="pagin(true)">
         </div>
     </div>

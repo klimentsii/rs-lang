@@ -1,18 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { dataBase } from "../../interfaces/interfaces";
 import { URL } from "src/app/constants/constants";
+import { async } from "@angular/core/testing";
 
 // interface Word {
 //   userId: string,
 //   wordId: string,
 //   word: object
 // }
-
-interface Word {
-  userId: string,
-  wordId: string,
-  word: object
-}
 
 @Component({
   selector: "app-book-page",
@@ -26,6 +21,7 @@ export class BookPageComponent implements OnInit {
   token: string;
 
   page: number;
+  pages: Array<number> = [];
   word: number;
 
   levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "B2"];
@@ -35,6 +31,9 @@ export class BookPageComponent implements OnInit {
 
     if (!localStorage.getItem("page")) localStorage.setItem("page", "0");
     this.page = Number(localStorage.getItem("page")) + 1;
+
+    if (!localStorage.getItem("pages")) localStorage.setItem("pages", JSON.stringify([30, 1, 2]));
+    this.pages = JSON.parse(localStorage.getItem("pages")!);
 
     if (!localStorage.getItem("group")) localStorage.setItem("group", "0");
 
@@ -57,8 +56,6 @@ export class BookPageComponent implements OnInit {
 
   ngAfterContentInit(): void {
     this.importWord(Number(localStorage.getItem("group")));
-
-    // this.activeWord(0);
   }
 
   // async createUserWord({ userId, wordId, word }: Word) {
@@ -135,6 +132,9 @@ export class BookPageComponent implements OnInit {
 
     arr[1].textContent = String(this.page);
 
-    this.importWord(this.word);
+    localStorage.setItem("page", `${this.page - 1}`);
+    localStorage.setItem("pages", JSON.stringify([Number(arr[0].textContent), this.page, Number(arr[2].textContent)]));
+
+    this.importWord(Number(localStorage.getItem("group")));
   }
 }

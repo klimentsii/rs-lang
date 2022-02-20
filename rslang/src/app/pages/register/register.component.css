@@ -6,10 +6,19 @@
   background-size: cover;
 
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
 
   /* position: relative;
   z-index: -10; */
+}
+
+.auth>.container{
+  position: absolute;
+  right: 0;
+  left: 0;
 }
 
 .auth-inner {
@@ -20,7 +29,7 @@
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px white solid;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 20px;
 }
 
@@ -29,6 +38,8 @@
   height: 50px;
   border-radius: 10px;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 .auth-title {
@@ -51,7 +62,7 @@
 }
 
 .auth-button:nth-child(1) {
-  background-color: #5685EC;
+  background-color: rgba(121, 192, 177, 0.8);
 }
 
 .auth-button:nth-child(2) {
@@ -80,21 +91,6 @@
 
 .auth-message.active {
   opacity: 1;
-}
-
-.auth-error {
-  position: absolute;
-  border: 1px rgb(255, 0, 0) solid;
-  background-color: #4d010152;
-  color: rgb(255, 0, 0);
-  padding: 10px 20px;
-  margin: 40px;
-  bottom: 0;
-  left: 0;
-  border-radius: 10px;
-  font-size: 24px;
-  transition: all 0.5s;
-  opacity: 0;
 }
 
 .auth-error.active {
