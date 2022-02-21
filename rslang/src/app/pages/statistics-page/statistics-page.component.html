@@ -1,1 +1,32 @@
-<p>statistics-page works!</p>
+<section class="statistics-page">
+  <div class="container">
+    <div class="page-statistics-inner">
+      <h3 class="title-statistics">Статистика за сегодня</h3>
+      <div class="main-results">
+        <div class="box-res" *ngFor="let item of resInfo; let i = index">
+          <p class="res">{{overallResults[i]}}</p>
+          <p class="res-info">{{item}}</p>
+        </div>
+      </div>
+      <div class="games-results">
+        <div class="block-game" *ngFor="let item of titleGames; let i = index">
+          <h4 class="title-game">{{item}}</h4>
+          <ul class="list">
+            <li class="list-content">
+              <img class="icons" src="../../../assets/icons/icon-1.png" alt="Icon done">
+              <span class="li-content-info">Изучено слов: {{[wordsLearned[i]]}}</span>
+            </li>
+            <li class="list-content">
+              <img class="icons" src="../../../assets/icons/icon-2.png" alt="Icon done">
+              <span class="li-content-info">Правильных ответов: {{procentTrueWords[i]}}%</span>
+            </li>
+            <li class="list-content">
+              <img class="icons" src="../../../assets/icons/icon-3.png" alt="Icon done">
+              <span class="li-content-info">Максимальное комбо: {{maxCombo[i]}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

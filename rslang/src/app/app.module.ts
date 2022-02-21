@@ -15,6 +15,8 @@ import { PageGamesComponent } from "./pages/page-games/page-games.component";
 import { GameAudioCallComponent } from "./pages/mini-games/game-audio-call/game-audio-call.component";
 import { AuthComponent } from "./pages/auth/auth.component";
 import { RegisterComponent } from "./pages/register/register.component";
+import { MiniIconsComponent } from "./pages/mini-games/mini-icons/mini-icons.component";
+import { FooterComponentComponent } from "./pages/footer-component/footer-component.component";
 
 const appRoutes: Routes = [
   { path: "", component: MainPageComponent },
@@ -40,6 +42,8 @@ const appRoutes: Routes = [
     GameAudioCallComponent,
     AuthComponent,
     RegisterComponent,
+    MiniIconsComponent,
+    FooterComponentComponent
   ],
   imports: [
     BrowserModule,

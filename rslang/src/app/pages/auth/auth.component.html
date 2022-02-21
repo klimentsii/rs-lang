@@ -5,10 +5,11 @@
       <div class="auth-suptitle">Email:</div>
       <input type="email" name="email" class="auth-input" value="email" [(ngModel)]="email">
       <div class="auth-suptitle">Password:</div>
-      <input type="password" name="password" class="auth-input" minlength="8" maxlength="32" value="email" [(ngModel)]="password">
+      <input type="password" name="password" class="auth-input" minlength="8" maxlength="32" value="email"
+        [(ngModel)]="password">
       <div class="auth-buttons">
         <button class="auth-button" (click)="loginUser({ 'email': email,'password': password })">Sign in</button>
-        <button class="auth-button" onclick="window.location.href='/register'">Sign up</button>
+        <a routerLink="/register"><button class="auth-button">Sign up</button></a>
         <button class="auth-button" (click)="logOut()">Log out</button>
       </div>
     </form>

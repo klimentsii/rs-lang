@@ -11,3 +11,27 @@ export const FIRST_PAGE = 0;
 export const randN = () => Math.floor(Math.random() * MAX_DATA);
 
 export const elseRandN = () => Math.floor(Math.random() * MAX_DATA);
+
+export const obj = {
+  "overall": {
+    "countTrueWords": 0,
+    "countFalseWords": 0,
+    "procentTrueWords": 0,
+    "countAllWords": 0,
+    "maxCombo": 0,
+  },
+  "sprint": {
+    "countTrueWords": 0,
+    "countFalseWords": 0,
+    "procentTrueWords": 0,
+    "countAllWords": 0,
+    "maxCombo": 0,
+  },
+  "audiocall": {
+    "countTrueWords": 0,
+    "countFalseWords": 0,
+    "procentTrueWords": 0,
+    "countAllWords": 0,
+    "maxCombo": 0,
+  },
+};

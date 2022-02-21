@@ -1,9 +1,12 @@
 import { Component } from "@angular/core";
 
-import { URL, LAST_PAGE } from "../../constants/constants";
+import { URL, LAST_PAGE, obj } from "../../constants/constants";
 import { dataBase } from "../../interfaces/interfaces";
 
 const MAX_COUNT_LEVELS = 1;
+
+if (!localStorage.getItem("obj")) localStorage.setItem("obj", JSON.stringify(obj));
+
 @Component({
   selector: "app-page-games",
   templateUrl: "./page-games.component.html",
