@@ -93,13 +93,15 @@ export class BookPageComponent implements OnInit {
       this.db = await fetch(`${URL}words?page=${this.page - 1}&group=${i}`)
       .then(response => response.json())
       .then(data => data);
+
+      document.querySelector(".word-pagination")?.setAttribute("style", "display: flex;");
+    } else {
+      document.querySelector(".word-pagination")?.setAttribute("style", "display: none;");
     }
 
     document.querySelectorAll(".book-level")[Number(localStorage.getItem("group"))].classList.remove("active");
     document.querySelectorAll(".book-level")[i].classList.add("active");
     localStorage.setItem("group", `${i}`);
-
-    this.gg();
   }
 
   activeWord(i: number) {
@@ -154,6 +156,8 @@ export class BookPageComponent implements OnInit {
     localStorage.setItem("pages", JSON.stringify([Number(arr[0].textContent), this.page, Number(arr[2].textContent)]));
 
     this.importWord(Number(localStorage.getItem("group")));
+
+    this.gg();
   }
 
   inToHard() {
