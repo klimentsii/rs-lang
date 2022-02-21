@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MiniIconsComponent } from './mini-icons.component';
+import { MiniIconsComponent } from "./mini-icons.component";
 
-describe('MiniIconsComponent', () => {
+describe("MiniIconsComponent", () => {
   let component: MiniIconsComponent;
   let fixture: ComponentFixture<MiniIconsComponent>;
 
@@ -19,7 +19,7 @@ describe('MiniIconsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

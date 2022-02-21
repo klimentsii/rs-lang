@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { obj } from "src/app/constants/constants";
 
 @Component({
   selector: "app-statistics-page",
@@ -52,7 +53,7 @@ export class StatisticsPageComponent implements OnInit {
     this.int = +setInterval(() => {
       const date = new Date();
       if (date.getHours() === 23 && date.getMinutes() === 59 && date.getSeconds() === 59) {
-        localStorage.removeItem("obj");
+        localStorage.setItem("obj", JSON.stringify(obj));
         clearInterval(this.int);
       }
     }, 1000);
