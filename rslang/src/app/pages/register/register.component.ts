@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
       border: 1px #F06171 solid; background-color: #4d010152; color: #F06171; padding: 10px 20px;
       margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
     `);
-    this.more3();
+    this.limitOf3Hints();
     return el;
   }
 
@@ -80,11 +80,11 @@ export class RegisterComponent implements OnInit {
       border: 1px #4FEE97 solid; background-color: #4d010152; color: #4FEE97; padding: 10px 20px;
       margin: 10px; left: 0; border-radius: 10px; font-size: 24px; transition: all 0.5s
     `);
-    this.more3();
+    this.limitOf3Hints();
     return el;
   }
 
-  more3() {
+  limitOf3Hints() {
     if (Number(document.querySelector(".auth")?.childElementCount) > 5) {
       document.querySelector(".auth")?.children[1].remove();
     }

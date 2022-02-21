@@ -124,3 +124,15 @@
   bottom:0;
   left:0;
 }
+
+
+
+@media(max-width: 1100px) {
+  .games-results {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .block-game {
+    width: 50%;
+  }
+}

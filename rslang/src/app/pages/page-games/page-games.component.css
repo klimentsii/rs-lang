@@ -139,3 +139,38 @@
   width:100px;
   height:100px;
 }
+
+@media(max-width: 1400px) {
+  .game {
+    width: 48%;
+    height: 100%;
+  }
+}
+@media(max-width: 920px) {
+  .level-eng {
+    width: 40px;
+    height: 40px;
+  }
+  .list-level {
+    flex-wrap: wrap;
+  }
+}
+@media(max-width: 600px) {
+  .info-about-game {
+    font-size: 14px;
+    margin: 0;
+  }
+  .title-select-lvl {
+    margin: 10px 0;
+  }
+  .level-eng {
+    width: 40px;
+    height: 40px;
+  }
+  .block-games {
+    height: 70%;
+  }
+  .name-of-game {
+    font-size: 16px;
+  }
+}

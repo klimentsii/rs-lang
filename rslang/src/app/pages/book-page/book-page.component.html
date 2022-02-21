@@ -26,6 +26,7 @@
             <div class="word-info-subword">{{db[word].wordTranslate}}</div>
             <div class="word-info-sound">{{db[word].transcription}}</div>
             <button class="word-info-button" (click)="inToHard()">Добавить в сложные слова</button>
+            <button class="word-info-button second" (click)="inToGreen()">Добавить в изученные слова</button>
             <div class="word-info-subword">Значение</div>
             <p class="word-info-text">{{db[word].textExample}}</p>
             <p class="word-info-text">{{db[word].textExampleTranslate}}</p>

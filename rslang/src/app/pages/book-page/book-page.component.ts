@@ -37,6 +37,7 @@ export class BookPageComponent implements OnInit {
   pages: Array<number> = [];
   word: number;
   hard: Array<string>;
+  green: Array<string>;
 
   levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "B2", "Словарь"];
   counts: Array<string> = ["1-600", "601-1200", "1201-1800", "1801-2400", "2401-3000", "3001-3600"];
@@ -60,6 +61,9 @@ export class BookPageComponent implements OnInit {
     if (!localStorage.getItem("hard")) localStorage.setItem("hard", "[]");
     this.hard = JSON.parse(localStorage.getItem("hard")!);
 
+    if (!localStorage.getItem("green")) localStorage.setItem("green", "[]");
+    this.green = JSON.parse(localStorage.getItem("green")!);
+
     // this.createUserWord({
     //   userId: "5ec993df4ca9d600178740ae",
     //   wordId: "5e9f5ee35eb9e72bc21af716",
@@ -82,8 +86,8 @@ export class BookPageComponent implements OnInit {
   }
 
   gg() {
-    console.log("gg");
     document.querySelectorAll(".word-item").forEach(e => this.hard.indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1 ? e.classList.add("hard") : e);
+    document.querySelectorAll(".word-item").forEach(e => this.green.indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1 ? e.classList.add("green") : e);
   }
 
   // async createUserWord({ userId, wordId, word }: Word) {
@@ -179,6 +183,13 @@ export class BookPageComponent implements OnInit {
       this.hard.push(this.db[this.word].word);
     }
     localStorage.setItem("hard", `${JSON.stringify(this.hard)}`);
+  }
+
+  inToGreen() {
+    if (this.green.indexOf(this.db[this.word].word) < 0) {
+      this.green.push(this.db[this.word].word);
+    }
+    localStorage.setItem("green", `${JSON.stringify(this.green)}`);
   }
 
   saveDb(): void {

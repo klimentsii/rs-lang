@@ -105,6 +105,14 @@
   background-color: rgba(204, 57, 123, 1);
 }
 
+.word-item.green {
+  background-color: rgba(80, 200, 120, 0.5);
+}
+
+.word-item.green.active {
+  background-color: rgba(80, 200, 120, 1);
+}
+
 .word-item:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -200,32 +208,34 @@
 }
 
 .box-about-project-inner{
-  margin-top: 50px;
+  margin: 50px 0;
   display: flex;
   align-items: center;
-  justify-content:space-between;
+  justify-content:space-evenly;
   flex-wrap: wrap;
 }
 
 .block-about-project {
   width: 35%;
   height: 350px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  color: white;
 }
 
 .img-card {
-  width: 180px;
+  width: 100px;
 }
 
 .title-card {
   text-align: center;
   font-size:32px;
-  color: black;
+  color: white;
   font-weight: bold;
   margin: 20px 0;
 }
@@ -238,4 +248,54 @@
   color: #FFFFFF;
   border: transparent;
   background-color: rgba(253, 253, 253, 0.2);
+}
+
+
+
+@media(max-width: 1340px) {
+  .word-item {
+    width: 300px;
+  }
+}
+@media(max-width: 1200px) {
+  .book-level {
+    width: 20%;
+    margin: 10px;
+  }
+  .book-levels {
+    flex-wrap: wrap;
+  }
+  .word-list {
+    width: 100%;
+    justify-content: center;
+  }
+  .word-info {
+    width: 100%;
+    margin-top: 50px;
+  }
+  .word {
+    flex-wrap: wrap;
+  }
+  .word-pagination {
+    width: 100%;
+  }
+  .word-pagination-number {
+     display: flex;
+     justify-content: center;
+  }
+}
+@media(max-width: 700px) {
+  .block-about-project {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .book-level {
+    flex-wrap: wrap;
+    width: 40%;
+  }
+}
+@media(max-width: 520px) {
+  .book-title {
+    padding-top: 100px;
+  }
 }
