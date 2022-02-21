@@ -22,15 +22,7 @@
 }
 
 @media(max-width: 720px) {
-  .header-inner {
-    flex-direction: column;
-    flex-wrap: wrap;
-  }
-  .header-ul {
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-  }
-  .header-li {
-    margin-bottom: 10px;
-  }
+.header-inner{
+  font-size: 12px;
+}
 }

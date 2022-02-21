@@ -142,8 +142,29 @@
   .title-game {
     font-size: 20px;
   }
+  .res, .res-info {
+    font-size:30px;
+  }
   .block-game {
     padding: 10px;
+  }
+  .list-content {
+    flex-direction: column;
+  }
+  .li-content-info {
+    margin: 0;
+  }
+  .title-statistics {
+    margin-top: 50px;
+  }
+}
+
+@media(max-width: 400px) {
+  .title-game {
+    font-size: 14px;
+  }
+  .block-game {
+    padding: 5px;
   }
   .list-content {
     flex-direction: column;
