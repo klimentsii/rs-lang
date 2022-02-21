@@ -42,6 +42,15 @@
           <div class="word-pagination-number">{{pages[2]}}</div>
           <img src="assets/arrow.png" alt="" class="word-pagination-arrow" (click)="pagin(true)">
         </div>
+
+            <div class="box-about-project-inner">
+              <div class="block-about-project" *ngFor="let item of titleCard; let i = index">
+                <img class="img-card" src="../../../assets/svg/{{pathPictures[i]}}.png" alt="Book">
+                <h4 class="title-card">{{item}}</h4>
+                <a routerLink={{linksOfGames[i]}} (click)="saveDb()"><button class="btn-play">Играть</button></a>
+              </div>
+            </div>
+
     </div>
   </div>
 </section>

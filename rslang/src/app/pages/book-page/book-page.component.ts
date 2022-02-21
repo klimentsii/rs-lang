@@ -16,6 +16,12 @@ import { URL } from "src/app/constants/constants";
 
 export class BookPageComponent implements OnInit {
 
+  titleCard: string[] = ["Спринт", "Аудиовызов"];
+
+  pathPictures: string[] = ["time", "hear"];
+
+  linksOfGames: string[] = ["/games/sprint", "/games/audio-call"];
+
   db: dataBase = [];
   token: string;
 
@@ -161,5 +167,9 @@ export class BookPageComponent implements OnInit {
       this.hard.push(this.db[this.word].word);
     }
     localStorage.setItem("hard", `${JSON.stringify(this.hard)}`);
+  }
+
+  saveDb(): void {
+    localStorage.setItem("db", JSON.stringify(this.db));
   }
 }

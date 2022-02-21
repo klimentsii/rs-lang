@@ -198,3 +198,44 @@
 .word-pagination-number.active {
   background-color: rgba(255, 255, 255, 0.2);
 }
+
+.box-about-project-inner{
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+  flex-wrap: wrap;
+}
+
+.block-about-project {
+  width: 35%;
+  height: 350px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-card {
+  width: 180px;
+}
+
+.title-card {
+  text-align: center;
+  font-size:32px;
+  color: black;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.btn-play {
+  text-align: center;
+  font-size: 36px;
+  width: 200px;
+  border-radius:20px;
+  color: #FFFFFF;
+  border: transparent;
+  background-color: rgba(253, 253, 253, 0.2);
+}
