@@ -85,3 +85,13 @@
   width: 100%;
 }
 
+
+/*
+@media(max-width: 900px) {
+  .container {
+    top: 50px;
+  }
+  .auth-error {
+    bottom: 0;
+  }
+} */

@@ -131,8 +131,27 @@
   .games-results {
     flex-wrap: nowrap;
     width: 100%;
+    justify-content: space-between;
   }
   .block-game {
-    width: 50%;
+    width: 46%;
+    margin: 0;
+  }
+}
+@media(max-width: 600px) {
+  .title-game {
+    font-size: 20px;
+  }
+  .block-game {
+    padding: 10px;
+  }
+  .list-content {
+    flex-direction: column;
+  }
+  .li-content-info {
+    margin: 0;
+  }
+  .title-statistics {
+    margin-top: 50px;
   }
 }

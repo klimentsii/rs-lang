@@ -66,11 +66,12 @@
 .list-of-words{
   margin-top: 50px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .list-words{
   margin-top: 10px;
-
 }
 
 .popup-container::-webkit-scrollbar {
@@ -154,6 +155,7 @@
   border: 3px solid rgba(255, 255, 255, 0.100);
   cursor: pointer;
   animation: words-animation 1s forwards;
+  margin-top: 10px;
 }
 
 @keyframes words-animation {
@@ -296,4 +298,9 @@
   color: #FFFFFF;
   border-color: #18aaaa;
   transition:.5s;
+}
+@media(max-width: 500px) {
+  #imageVolume {
+    width: 100px;
+  }
 }

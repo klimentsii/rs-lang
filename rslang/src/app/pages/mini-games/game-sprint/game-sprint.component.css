@@ -272,3 +272,11 @@
   padding: 0 15px;
   color: #778899;
 }
+
+
+
+@media(max-width: 600px) {
+  .words {
+    font-size: 20px;
+  }
+}
