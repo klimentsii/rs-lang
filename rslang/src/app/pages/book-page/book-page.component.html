@@ -9,9 +9,10 @@
                 <div class="book-level-count">{{counts[i]}}</div>
             </div>
         </div>
-        <div class="book-title">Words</div>
-        <div class="word">
 
+        <div class="book-title">Words</div>
+
+        <div class="word">
           <div class="word-list">
             <div class="word-item" *ngFor="let item of db; let i = index" (click)="activeWord(i)">
               <div class="word-item-word">{{item.word}}</div>
@@ -24,7 +25,7 @@
             <div class="word-info-word">{{db[word].word}}</div>
             <div class="word-info-subword">{{db[word].wordTranslate}}</div>
             <div class="word-info-sound">{{db[word].transcription}}</div>
-            <button class="word-info-button">Into compound words</button>
+            <button class="word-info-button" (click)="inToHard()">Into compound words</button>
             <div class="word-info-subword">Mean</div>
             <p class="word-info-text">{{db[word].textExample}}</p>
             <p class="word-info-text">{{db[word].textExampleTranslate}}</p>
@@ -32,7 +33,6 @@
             <p class="word-info-text">{{db[word].textMeaning}}</p>
             <p class="word-info-text">{{db[word].textMeaningTranslate}}</p>
           </div>
-
         </div>
 
         <div class="word-pagination">

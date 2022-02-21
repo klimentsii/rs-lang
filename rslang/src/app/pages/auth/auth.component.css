@@ -10,6 +10,8 @@
   align-items: flex-start;
   justify-content: center;
   animation: show .5s ease-in-out forwards;
+
+  overflow: hidden;
 }
 
 @keyframes show {

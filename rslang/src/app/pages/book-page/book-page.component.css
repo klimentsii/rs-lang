@@ -31,7 +31,7 @@
 }
 
 .book-level {
-  width: 15%;
+  width: 13%;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   padding: 10px 20px;
@@ -43,6 +43,14 @@
   cursor: pointer;
 
   transition: all .3s;
+}
+
+.book-level:nth-child(7) {
+  background-color: rgba(204, 57, 123, 0.5);
+}
+
+.book-level:nth-child(7).active {
+  background-color: rgba(204, 57, 123, 1);
 }
 
 .book-level:hover {
@@ -87,6 +95,14 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.word-item.hard {
+  background-color: rgba(204, 57, 123, 0.5);
+}
+
+.word-item.hard.active {
+  background-color: rgba(204, 57, 123, 1);
 }
 
 .word-item:hover {
@@ -139,6 +155,19 @@
 .word-info-text {
   margin: 10px 0;
   text-align: justify;
+}
+
+.word-info-button {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: azure;
+  margin-top: 10px;
+  display: block;
+}
+
+.word-info-button.hidden {
+  display: none;
 }
 
 

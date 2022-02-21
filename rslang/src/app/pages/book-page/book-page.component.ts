@@ -22,8 +22,9 @@ export class BookPageComponent implements OnInit {
   page: number;
   pages: Array<number> = [];
   word: number;
+  hard: Array<string>;
 
-  levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "B2"];
+  levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "B2", "Dictionary"];
   counts: Array<string> = ["1-600", "601-1200", "1201-1800", "1801-2400", "2401-3000", "3001-3600"];
 
   constructor() {
@@ -42,6 +43,9 @@ export class BookPageComponent implements OnInit {
     if (!localStorage.getItem("word")) localStorage.setItem("word", "0");
     this.word = Number(localStorage.getItem("word"));
 
+    if (!localStorage.getItem("hard")) localStorage.setItem("hard", "[]");
+    this.hard = JSON.parse(localStorage.getItem("hard")!);
+
     // this.createUserWord({
     //   userId: "5ec993df4ca9d600178740ae",
     //   wordId: "5e9f5ee35eb9e72bc21af716",
@@ -55,6 +59,17 @@ export class BookPageComponent implements OnInit {
 
   ngAfterContentInit(): void {
     this.importWord(Number(localStorage.getItem("group")));
+
+    if (localStorage.getItem("auth") === "") document.querySelector(".word-info-button")?.classList.add("hidden");
+  }
+
+  ngAfterViewInit(): void {
+    this.gg();
+  }
+
+  gg() {
+    console.log("gg");
+    document.querySelectorAll(".word-item").forEach(e => this.hard.indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1 ? e.classList.add("hard") : e);
   }
 
   // async createUserWord({ userId, wordId, word }: Word) {
@@ -74,13 +89,17 @@ export class BookPageComponent implements OnInit {
   // }
 
   async importWord(i: number) {
-    this.db = await fetch(`${URL}words?page=${this.page - 1}&group=${i}`)
-    .then(response => response.json())
-    .then(data => data);
+    if (i < 6) {
+      this.db = await fetch(`${URL}words?page=${this.page - 1}&group=${i}`)
+      .then(response => response.json())
+      .then(data => data);
+    }
 
     document.querySelectorAll(".book-level")[Number(localStorage.getItem("group"))].classList.remove("active");
     document.querySelectorAll(".book-level")[i].classList.add("active");
     localStorage.setItem("group", `${i}`);
+
+    this.gg();
   }
 
   activeWord(i: number) {
@@ -135,5 +154,12 @@ export class BookPageComponent implements OnInit {
     localStorage.setItem("pages", JSON.stringify([Number(arr[0].textContent), this.page, Number(arr[2].textContent)]));
 
     this.importWord(Number(localStorage.getItem("group")));
+  }
+
+  inToHard() {
+    if (this.hard.indexOf(this.db[this.word].word) < 0) {
+      this.hard.push(this.db[this.word].word);
+    }
+    localStorage.setItem("hard", `${JSON.stringify(this.hard)}`);
   }
 }
