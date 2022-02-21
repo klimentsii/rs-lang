@@ -39,7 +39,7 @@ export class BookPageComponent implements OnInit {
   hard: Array<string>;
   green: Array<string>;
 
-  levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "B2", "Словарь"];
+  levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "C2", "Словарь"];
   counts: Array<string> = ["1-600", "601-1200", "1201-1800", "1801-2400", "2401-3000", "3001-3600"];
 
   constructor() {
@@ -176,6 +176,7 @@ export class BookPageComponent implements OnInit {
     this.importWord(Number(localStorage.getItem("group")));
 
     this.gg();
+    location.reload();
   }
 
   inToHard() {
@@ -183,6 +184,7 @@ export class BookPageComponent implements OnInit {
       this.hard.push(this.db[this.word].word);
     }
     localStorage.setItem("hard", `${JSON.stringify(this.hard)}`);
+    location.reload();
   }
 
   inToGreen() {
@@ -190,6 +192,7 @@ export class BookPageComponent implements OnInit {
       this.green.push(this.db[this.word].word);
     }
     localStorage.setItem("green", `${JSON.stringify(this.green)}`);
+    location.reload();
   }
 
   saveDb(): void {
