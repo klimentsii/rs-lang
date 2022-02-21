@@ -15,7 +15,6 @@ import { PageGamesComponent } from "./pages/page-games/page-games.component";
 import { GameAudioCallComponent } from "./pages/mini-games/game-audio-call/game-audio-call.component";
 import { AuthComponent } from "./pages/auth/auth.component";
 import { RegisterComponent } from "./pages/register/register.component";
-import { DictionaryComponent } from "./pages/dictionary/dictionary.component";
 
 const appRoutes: Routes = [
   { path: "", component: MainPageComponent },
@@ -26,7 +25,6 @@ const appRoutes: Routes = [
   { path: "games/audio-call", component: GameAudioCallComponent },
   { path: "auth", component: AuthComponent },
   { path: "register", component: RegisterComponent },
-  { path: "dictionary", component: DictionaryComponent },
   { path: "**", component: MainPageComponent },
 ];
 
@@ -42,7 +40,6 @@ const appRoutes: Routes = [
     GameAudioCallComponent,
     AuthComponent,
     RegisterComponent,
-    DictionaryComponent
   ],
   imports: [
     BrowserModule,

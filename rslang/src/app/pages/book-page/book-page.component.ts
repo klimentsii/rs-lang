@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { dataBase } from "../../interfaces/interfaces";
 import { URL } from "src/app/constants/constants";
-import { async } from "@angular/core/testing";
 
 // interface Word {
 //   userId: string,
