@@ -10,6 +10,8 @@
   align-items: flex-start;
   justify-content: center;
   animation: show .5s ease-in-out forwards;
+
+  overflow: hidden;
 }
 
 @keyframes show {
@@ -83,3 +85,13 @@
   width: 100%;
 }
 
+
+/*
+@media(max-width: 900px) {
+  .container {
+    top: 50px;
+  }
+  .auth-error {
+    bottom: 0;
+  }
+} */
