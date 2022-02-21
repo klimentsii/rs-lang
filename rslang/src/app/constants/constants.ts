@@ -6,6 +6,8 @@ export const MAX_DATA = 20;
 
 export const LAST_PAGE = 29;
 
+export const LAST_PAGE_ON_PAGINATION = 30;
+
 export const FIRST_PAGE = 0;
 
 export const randN = () => Math.floor(Math.random() * MAX_DATA);
