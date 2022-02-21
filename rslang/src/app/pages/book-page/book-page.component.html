@@ -1,8 +1,8 @@
 <section class="book">
   <div class="container">
     <div class="book-inner">
-        <div class="book-title">Textbook</div>
-        <div class="book-suptitle">Levels of difficulty</div>
+        <div class="book-title">Учебник</div>
+        <div class="book-suptitle">Уровни сложности</div>
         <div class="book-levels">
             <div class="book-level" *ngFor="let item of levels; let i = index" (click)="importWord(i)">
                 <div class="book-level-symbol">{{item}}</div>
@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="book-title">Words</div>
+        <div class="book-title">Слова</div>
 
         <div class="word">
           <div class="word-list">
@@ -25,11 +25,11 @@
             <div class="word-info-word">{{db[word].word}}</div>
             <div class="word-info-subword">{{db[word].wordTranslate}}</div>
             <div class="word-info-sound">{{db[word].transcription}}</div>
-            <button class="word-info-button" (click)="inToHard()">Into compound words</button>
-            <div class="word-info-subword">Mean</div>
+            <button class="word-info-button" (click)="inToHard()">Добавить в сложные слова</button>
+            <div class="word-info-subword">Значение</div>
             <p class="word-info-text">{{db[word].textExample}}</p>
             <p class="word-info-text">{{db[word].textExampleTranslate}}</p>
-            <div class="word-info-subword">Example</div>
+            <div class="word-info-subword">Пример</div>
             <p class="word-info-text">{{db[word].textMeaning}}</p>
             <p class="word-info-text">{{db[word].textMeaningTranslate}}</p>
           </div>

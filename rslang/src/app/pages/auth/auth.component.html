@@ -1,16 +1,16 @@
 <section class="auth">
   <div class="container">
     <form class="auth-inner">
-      <div class="auth-title">Sign in</div>
-      <div class="auth-suptitle">Email:</div>
+      <div class="auth-title">Войти</div>
+      <div class="auth-suptitle">Почта:</div>
       <input type="email" name="email" class="auth-input" value="email" [(ngModel)]="email">
-      <div class="auth-suptitle">Password:</div>
+      <div class="auth-suptitle">Пароль:</div>
       <input type="password" name="password" class="auth-input" minlength="8" maxlength="32" value="email"
         [(ngModel)]="password">
       <div class="auth-buttons">
-        <button class="auth-button" (click)="loginUser({ 'email': email,'password': password })">Sign in</button>
-        <a routerLink="/register"><button class="auth-button">Sign up</button></a>
-        <button class="auth-button" (click)="logOut()">Log out</button>
+        <button class="auth-button" (click)="loginUser({ 'email': email,'password': password })">Войти</button>
+        <a routerLink="/register"><button class="auth-button">Регистрация</button></a>
+        <button class="auth-button" (click)="logOut()">Выйти</button>
       </div>
     </form>
   </div>
