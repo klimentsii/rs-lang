@@ -127,6 +127,7 @@ strong {
   background: url(../../../assets/bg/bg-main-about-projjpg.jpg);
   box-shadow: 4px 4px 4px 4px rgb(231, 113, 166);
   border-radius: 20px;
+  margin: 10px;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;

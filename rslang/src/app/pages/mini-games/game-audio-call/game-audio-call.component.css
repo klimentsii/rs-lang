@@ -56,7 +56,6 @@
 }
 
 .audio-call-inner{
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,7 +302,10 @@
   transition:.5s;
 }
 
-@media(max-width: 960px) {
+@media(max-width: 1400px) {
+  .audio-call-inner {
+    margin-top: 80px;
+  }
 
   .audio-call-column {
     height:auto;
