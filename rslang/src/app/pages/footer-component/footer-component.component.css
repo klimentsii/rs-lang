@@ -16,3 +16,9 @@ p {
 .footer-boxex a:nth-child(2){
   margin-left:20px;
 }
+
+@media(max-width: 500px) {
+p {
+  font-size: 17px;
+}
+}
