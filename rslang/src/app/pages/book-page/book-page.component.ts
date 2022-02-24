@@ -36,7 +36,7 @@ export class BookPageComponent implements OnInit {
   page: number;
   pages: Array<number> = [];
   word: number;
-  hard: Array<string>;
+  hard: Array<Array<string | number>>;
   green: Array<string>;
 
   levels: Array<string> = ["A1", "A2", "B1", "B2", "C1", "C2", "Словарь"];
@@ -86,7 +86,11 @@ export class BookPageComponent implements OnInit {
   }
 
   gg() {
-    document.querySelectorAll(".word-item").forEach(e => this.hard.indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1 ? e.classList.add("hard") : e);
+    document.querySelectorAll(".word-item").forEach(e =>
+      this.hard.map(g => g[0]).indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1
+    ? e.classList.add("hard")
+    : e);
+
     document.querySelectorAll(".word-item").forEach(e => this.green.indexOf(String(e.getElementsByClassName("word-item-word")[0].textContent)) > -1 ? e.classList.add("green") : e);
   }
 
@@ -113,13 +117,25 @@ export class BookPageComponent implements OnInit {
       .then(data => data);
 
       document.querySelector(".word-pagination")?.setAttribute("style", "display: flex;");
+      document.querySelector(".box-about-project-inner")?.setAttribute("style", "display: flex;");
     } else {
+      // document.querySelector(".word-list")!.innerHTML = "";
+      this.hard.map(async e => {
+        const word = await fetch(`${URL}words?page=${e[1]}&group=${e[2]}`)
+          .then(response => response.json())
+          .then(data => data);
+
+        document.querySelector(".word-list")?.append(this.createWordItem(word[e[3]].word, word[e[3]].wordTranslate));
+      });
       document.querySelector(".word-pagination")?.setAttribute("style", "display: none;");
+      document.querySelector(".box-about-project-inner")?.setAttribute("style", "display: none;");
     }
 
     document.querySelectorAll(".book-level")[Number(localStorage.getItem("group"))].classList.remove("active");
     document.querySelectorAll(".book-level")[i].classList.add("active");
     localStorage.setItem("group", `${i}`);
+
+    document.querySelector(".word-info-avatar")?.setAttribute("src", `${URL}${this.db[this.word].image}`);
   }
 
   activeWord(i: number) {
@@ -180,8 +196,8 @@ export class BookPageComponent implements OnInit {
   }
 
   inToHard() {
-    if (this.hard.indexOf(this.db[this.word].word) < 0) {
-      this.hard.push(this.db[this.word].word);
+    if (this.hard.map(e => e[0]).indexOf(this.db[this.word].word) < 0) {
+      this.hard.push([this.db[this.word].word,  this.page, Number(localStorage.getItem("group")), this.word]);
     }
     localStorage.setItem("hard", `${JSON.stringify(this.hard)}`);
     location.reload();
@@ -195,7 +211,48 @@ export class BookPageComponent implements OnInit {
     location.reload();
   }
 
+  soundOfWord() {
+    const audio = new Audio();
+    const audio2 = new Audio();
+    audio.src = `${URL}${this.db[this.word].audio}`;
+    audio2.src = `${URL}${this.db[this.word].audioExample}`;
+    audio.play();
+    if (audio.ended) {
+      audio2.play();
+    }
+  }
+
   saveDb(): void {
     localStorage.setItem("db", JSON.stringify(this.db));
+  }
+
+  createWordItem(text1: string, text2: string) {
+    const wI = document.createElement("div");
+    const wIw = document.createElement("div");
+    const wIt = document.createElement("div");
+    wI.append(wIw, wIt);
+    wIw.textContent = text1;
+    wIt.textContent = text2;
+    wI.setAttribute("style", `
+      width: 20%;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      cursor: pointer;
+
+      transition: all .3s;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    `);
+    wIw.setAttribute("style", `
+      font-size: 20px;
+      font-weight: bold;
+    `);
+    wIt.setAttribute("style", `
+      font-size: 14px;
+    `);
+    return wI;
   }
 }

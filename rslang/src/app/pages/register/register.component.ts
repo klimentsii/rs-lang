@@ -25,17 +25,15 @@ export class RegisterComponent implements OnInit {
   }
 
   async createUser(user: object) {
-    const arr = document.querySelectorAll("input.auth-input");
-
-    if (arr[0].getAttribute("ng-reflect-model")!.length < 1) {
+    if (this.email.length < 1) {
       document.querySelector(".auth")?.append(this.createError("Please enter your email"));
-    } else if(String(arr[0].getAttribute("ng-reflect-model")).indexOf("@") < 0) {
+    } else if(String(this.email).indexOf("@") < 0) {
       document.querySelector(".auth")?.append(this.createError("Please add @ in your email"));
-    } else if(String(arr[0].getAttribute("ng-reflect-model")).indexOf(".") < 0) {
+    } else if(String(this.email).indexOf(".") < 0) {
       document.querySelector(".auth")?.append(this.createError("Please add . in your email"));
-    } else if (arr[1].getAttribute("ng-reflect-model")!.length < 8) {
+    } else if (this.password.length < 8) {
       document.querySelector(".auth")?.append(this.createError("Please enter your password(min 8 symbols)"));
-    }  else if (arr[1].getAttribute("ng-reflect-model") !== arr[2].getAttribute("ng-reflect-model")) {
+    }  else if (this.password !== this.password2) {
       document.querySelector(".auth")?.append(this.createError("Password must be the same"));
     } else {
       const rawResponse = await fetch("https://app-name-rslang.herokuapp.com/users", {

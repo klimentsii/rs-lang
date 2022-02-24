@@ -178,6 +178,16 @@
   display: none;
 }
 
+.word-info-sound {
+  width: 50px;
+  cursor: pointer;
+  transition: all .3s;
+  opacity: 1;
+}
+.word-info-sound:hover {
+  opacity: 0.6;
+}
+
 
 .word-pagination {
   width: 20%;
