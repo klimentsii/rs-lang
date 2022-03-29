@@ -6,3 +6,6 @@ Welcome to our RS Lang task review
 ### Техонологии, которые использовались во время разрабокти это: ###
 
 * SPA
+* Routing
+* Async requests
+* Connection with db
