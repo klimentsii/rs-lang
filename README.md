@@ -1,11 +1,26 @@
 # rs-lang
+
 Welcome to our RS Lang task review
 
-### В процессе разработки мы использовали фреймворк Angular. ###
+#### В процессе разработки мы использовали: ####
 
-### Техонологии, которые использовались во время разрабокти это: ###
+* Фреймворк Angular
+* Typescript
+* CSS
+* HTML
+* JS
+* Eslint
+* Prettier
+
+#### Техонологии, которые использовались во время разрабокти это: ####
 
 * SPA
 * Routing
 * Async requests
 * Connection with db
+
+#### Дополнительно: ####
+
+* Netlify
+* Heroku
+* MongoDB
