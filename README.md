@@ -30,5 +30,4 @@ https://github.com/klimentsii/rs-lang/pull/15
 #### Дополнительно: ####
 
 * Netlify
-* Heroku
 * MongoDB
