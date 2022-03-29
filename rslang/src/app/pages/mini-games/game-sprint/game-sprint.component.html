@@ -1,0 +1,74 @@
+<section class="sprint-page">
+  <div class="container">
+    <div class="sprint-inner">
+      <app-mini-icons></app-mini-icons>
+      <div class="timer-box">
+        <img src="../../../../assets/svg/timer.svg" alt="Timer">
+        <p class="sec-time">{{timeOut}} sec</p>
+      </div>
+      <div class="content-box">
+        <ul class="list-circle">
+          <li class="circle"></li>
+          <li class="circle"></li>
+          <li class="circle"></li>
+        </ul>
+        <p class="points"><span class="combo">x{{saveCombo}} - </span>{{points}} <span *ngIf="showSum"
+            class="calc">+{{calcSumm}}</span></p>
+      </div>
+      <div class="block-with-words">
+        <p class="noselect">
+          <span class="words">{{word}}</span> это
+          <span class="words">{{wordTranslate}}</span> ?
+        </p>
+      </div>
+      <div class="block-with-btns">
+        <button class="btns-sprint" (click)="falseAnswer()">&#8592; неверно</button>
+        <button class="btns-sprint" (click)="trueAnswer()">верно &#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="popup" *ngIf="showPopup">
+  <div class="box-popup">
+    <h3 class="title-popup">результаты игры</h3>
+    <div class="popup-container">
+      <p class="points-result">
+        <span>Очков: </span>
+        <span>{{points}}</span>
+      </p>
+      <p class="points-result">
+        <span>Комбо: </span>
+        <span>x{{maxCombo}}</span>
+      </p>
+
+      <div class="block-with-result">
+        <p>Знаю <span class="count-words green">{{trueResultsWord.length}}</span></p>
+        <ul class="list-words">
+          <li class="word" *ngFor="let item of trueResultsWord; let i = index">
+            {{item}}
+            <span class="translate-word"> - {{trueResultsWordTranslate[i]}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="block-with-result">
+        <p>Ошибок <span class="count-words red">{{falseResultsWord.length}}</span></p>
+        <ul class="list-words">
+          <li class="word" *ngFor="let item of falseResultsWord; let i = index">
+            {{item}}
+            <span class="translate-word">
+              -
+              {{falseResultsWordTranslate[i]}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a routerLink=""><button class="btns-popup">На главную</button></a>
+      <a routerLink="/games"><button class="btns-popup" id="secBtn">Сыграть еще раз</button></a>
+    </div>
+
+  </div>
+</div>

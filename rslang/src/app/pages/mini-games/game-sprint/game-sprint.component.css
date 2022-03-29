@@ -1,0 +1,284 @@
+.sprint-page {
+  width: 100%;
+  height: 100vh;
+  background: url('/assets/bg/sprint-bg.jpg') center no-repeat;
+  background-size: cover;
+  display: flex;
+  animation: show .5s ease-in-out forwards;
+}
+
+@keyframes show {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.sprint-inner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #FFFFFF;
+}
+
+.list-circle {
+  display: flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.noselect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.content-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+}
+
+.points{
+  margin-top:10px;
+  font-size:45px;
+  color:#FFFACD;
+  font-weight:bold;
+  letter-spacing:3px;
+}
+
+.circle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  margin-left: 15px;
+  transition: .2s;
+}
+
+.combo{
+  color: #FF69B4;
+}
+
+.sec-time{
+  color: #FFEFD5;
+  font-size:25px;
+
+}
+
+.timer-box{
+  margin-bottom: 15px;
+  text-decoration: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-box img{
+  width: 70px;
+  height: 70px;
+}
+
+.words{
+  color: #FFD700;
+  font-size:45px;
+  margin: 0 15px;
+}
+
+.green-coloring{
+  transition: .3s;
+  background-color: #006400;
+}
+
+.block-with-btns{
+  display: flex;
+  flex: wrap;
+  margin-top: 30px;
+}
+
+.btns-sprint{
+  width:150px;
+  height:50px;
+  background-color: transparent;
+  border-radius:20px;
+  border: 4px solid;
+  font-size: 21px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+.btns-sprint:nth-child(2) {
+  border-color: #006400;
+  color: #006400;
+  margin-left: 15px;
+
+}
+
+.btns-sprint:nth-child(1) {
+  color: #A52A2A;
+  border-color: #A52A2A;
+}
+
+.calc{
+  font-size: 20px !important;
+  color: #F5FFFA !important;
+  opacity: 0.6;
+}
+
+/* ------------------POPUP----------------------- */
+
+.popup-container::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+
+.popup-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #18aaaa;
+}
+
+.popup-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.600);
+}
+
+.box-popup {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  margin: 0 auto;
+  top:20%;
+  background-color: #FFFFFF;
+  padding: 25px 15px;
+  border-radius: 10px;
+  animation: image 1s;
+}
+
+.popup-container{
+  overflow-y: scroll;
+  height: 350px;
+}
+
+#secBtn{
+  margin-left: 20px;
+}
+
+.title-popup{
+  text-align: center;
+  font-size:30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000000;
+
+}
+
+.block-with-result{
+  margin-top:20px;
+}
+
+.block-with-result p{
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing:3px;
+  color: #000000;
+}
+
+.count-words {
+  color:black;
+  border-radius: 10px;
+  padding: 0 15px;
+  margin-left: 10px;
+}
+
+.block-with-result{
+  border-bottom: 2px solid rgb(25, 25, 25);
+}
+
+.green{
+  background-color:green;
+}
+
+.red{
+  background-color:red;
+}
+
+.btns{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btns-popup {
+  background-color: #18aaaa;
+  border: 2px solid black;
+  width:150px;
+  height: 50px;
+  transition:.5s;
+  font-size: 16px;
+  font-weight:bolder;
+  color: black;
+  border-radius: 10px;
+}
+
+.btns-popup:hover {
+  background-color: #18aaaa;;
+  color: #FFFFFF;
+  border-color: #18aaaa;
+  transition:.5s;
+}
+
+.word {
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size:18px;
+  letter-spacing:2px;
+  color: #000000;
+}
+
+.word::first-letter{
+  text-transform: uppercase;
+}
+
+.translate-word {
+  font-size:18px;
+  letter-spacing:2px;
+  color: #000000;
+}
+
+.points-result{
+  margin-top:5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30px;
+  padding: 0 15px;
+  color: #778899;
+}
+
+
+
+@media(max-width: 600px) {
+  .words {
+    font-size: 20px;
+  }
+}

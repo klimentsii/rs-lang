@@ -1,0 +1,75 @@
+<section class="main-page">
+  <div class="container">
+    <div class="main-page-inner">
+      <div class="main-page-suptitle">Welcome to our review on</div>
+      <div class="main-page-title">RS Lang</div>
+    </div>
+  </div>
+</section>
+
+<section class="box-about-project">
+  <div class="container">
+    <h3 class="title-about-project">Знакомство с приложением RS Lang</h3>
+
+    <div class="box-about-project-inner">
+      <div class="block-about-project" *ngFor="let item of titleCard; let i = index">
+        <img class="img-card" src="../../../assets/icons/{{pathPictures[i]}}.png" alt="Book">
+        <h4 class="title-card">{{item}}</h4>
+        <div class="info-card">{{infoAboutCard[i]}}</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="dev">
+  <div class="container">
+    <div class="dev-inner">
+
+      <div class="dev-item">
+        <div class="dev-info">
+          <div class="dev-title">Artvvr</div>
+          <div class="dev-suptitle"><span class="speciality">TEAMLEAD</span> | <span class="developer">Developer</span>
+          </div>
+          <div class="dev-text">
+            Создал и настроил структуру проекта вместе с роутингом. Разработал: страницу с
+            мини-играми, <strong>«Спринт»</strong>, <strong>«Аудиовызов»</strong>, <strong>«Статистику»</strong>, так же
+            дополнил часть <strong>«Главной»</strong> страницы.
+          </div>
+          <ul class="dev-social">
+            <a target="_blank" _blank href="https://github.com/ARTVVR" class="dev-soc"><img src="/assets/svg/github.png"
+                alt="GitHub"></a>
+            <a target="_blank" _blank href="https://t.me/yung_christ_666" class="dev-soc"><img
+                src="/assets/svg/telegram.png" alt="Telegram"></a>
+            <a target="_blank" _blank href="https://www.instagram.com/artvr.metelsky/" class="dev-soc"><img
+                src="/assets/svg/inst.png" alt="Instagram"></a>
+          </ul>
+        </div>
+        <img src="../../../assets/photo/artvvr.jpg" alt="Photo Artvvr" class="dev-img">
+      </div>
+
+      <div class="dev-item">
+        <img src="../../../assets/photo/klimentsii.jpg" alt="Photo Klimentsii" class="dev-img">
+        <div class="dev-info">
+          <div class="dev-title">Klimentsii</div>
+          <div class="dev-suptitle"><span class="speciality">DESIGNER</span> | <span class="developer">Developer</span>
+          </div>
+          <div class="dev-text">Создал и придумал дизайн к проекту вместе с адаптивом. Разработал:
+            <strong>«Главную»</strong>,
+            <strong>«Авторизацию»</strong>, <strong>«Учебник»</strong>, <strong>«Cловарь»</strong>, так же дополнил
+            дизайн к странице с мини-играми.
+          </div>
+          <ul class="dev-social">
+            <a target="_blank" href="https://github.com/klimentsii" class="dev-soc"><img src="/assets/svg/github.png"
+                alt="GitHub"></a>
+            <a target="_blank" href="https://t.me/klimentsii" class="dev-soc"><img src="/assets/svg/telegram.png"
+                alt="Telegram"></a>
+            <a target="_blank" href="https://www.instagram.com/biznesir/" class="dev-soc"><img
+                src="/assets/svg/inst.png" alt="Instagram"></a>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
