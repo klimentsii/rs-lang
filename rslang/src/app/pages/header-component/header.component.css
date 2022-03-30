@@ -22,7 +22,12 @@
 }
 
 @media(max-width: 720px) {
-.header-inner{
-  font-size: 12px;
+  .header-inner{
+    font-size: 12px;
+  }
+
+  .header-li{
+  margin-left:10px;
 }
+
 }
