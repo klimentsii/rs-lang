@@ -59,20 +59,26 @@ export class GameSprintComponent implements OnInit {
   constructor(protected _location: Location) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.notFoundDb();
     this.getDb();
+  }
+
+  async notFoundDb(): Promise<void> {
+    if (JSON.parse(localStorage.getItem("db") as string) === null) {
+      this.db = await fetch(`${URL}words?page=${0}&group=${0}`)
+        .then(response => response.json())
+        .then(data => data);
+      localStorage.setItem("db", JSON.stringify(this.db));
+    }
   }
 
   getDb(): void {
     this.db = JSON.parse(localStorage.getItem("db") as string);
 
-    localStorage.removeItem("db");
-
     if (this.db) {
       this.assignDataWords();
       this.timeOfGame();
-    } else {
-      this._location.back();
     }
   }
 
