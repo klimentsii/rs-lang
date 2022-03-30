@@ -38,7 +38,8 @@ export class AuthComponent implements OnInit {
       return false;
     } else {
       const content = await rawResponse.json();
-      localStorage.setItem("auth", JSON.stringify([this.email ,this.password , content.token]));
+      localStorage.setItem("auth", JSON.stringify(content.token));
+      document.cookie = `email=${this.email}; password=${this.password}`;
       document.querySelector(".auth")?.append(this.createMessage("Authorized"));
       return content;
     }
